@@ -8,6 +8,7 @@ import Loader from './Components/Loader';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import ProjectDash from './Components/ProjectDash';
+import Login from './Components/Login';
 
 
 export class App extends Component {
@@ -15,6 +16,7 @@ export class App extends Component {
     return (
       <div className="App">
         <Navbar />
+        <Route exact path='/login' component={Login} />
         <Route exact path='/projects/dash/:id' component={ProjectDash} />      
         {this.props.loading ? <Loader /> : ''} 
         <Route exact path='/projects' component={Projects} />  

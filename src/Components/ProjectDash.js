@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './ProjectDash.css';
+import './css/ProjectDash.css';
 import {getAllProjects} from '../state/actions';
 import {withRouter} from 'react-router-dom';
 
@@ -29,6 +29,7 @@ export class ProjectDash extends React.Component {
 
   const mapStateToProps = (state, props) => ({
     project: state
+      .reducers
       .projects
       .find(project => project.id === Number(props.match.params.id))
   })

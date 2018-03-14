@@ -1,22 +1,17 @@
 import React from 'react';
-import {getAllProjects} from '../state/actions';
+import {getAllProjects, clearError} from '../state/actions';
 import {connect} from 'react-redux';
 import {withRouter, Link} from 'react-router-dom';
-import './Projects.css';
+import './css/Projects.css';
 
 export class Projects extends React.Component{
 
   componentDidMount () {
+    this.props.dispatch(clearError())
     if (this.props.projects.length === 0) {
     this.props.dispatch(getAllProjects());
     }
   }
-
-
-  // onClick(e) {
-  //   const projectId = e.target.parentNode.getAttribute("data-id");
-  //   this.props.dispatch(setCurrentProject(projectId));
-  // }
 
   render() {
   const projects = this.props.projects.map(project => (
@@ -31,20 +26,27 @@ export class Projects extends React.Component{
 
     return (
       <div className='project-dashboard-container'>
-        <h1 className='projects-title'>
-          View Available Projects
-        </h1>
-        <div className='projects-container'>
-        {projects}
-          </div>
-        <div className='project-list-container'></div>
+      <h1 className='projects-title'>
+            View Available Projects
+      </h1>
+        {this.props.appError ? <div className='app-error-message'>{this.props.appError}</div> : 
+        <div>
+
+          <div className='projects-container'>
+          {projects}
+            </div>
+          <div className='project-list-container'></div>
+        </div>
+        }
+
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  projects: state.projects
+  projects: state.reducers.projects,
+  appError:state.reducers.appError
 })
 
 export default withRouter(connect(mapStateToProps)(Projects));
