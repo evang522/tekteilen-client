@@ -11,17 +11,21 @@ export class Projects extends React.Component{
     if (this.props.projects.length === 0) {
     this.props.dispatch(getAllProjects());
     }
+
   }
 
   render() {
-  const projects = this.props.projects.map(project => (
+
+  const projects = (!this.props.projects || !this.props.projects.length) ? '' : this.props.projects.map(project => (
     <div data-id={project.id} key={project.id} className='project-card'>
       <h1 className='project-card-title'> Title: {project.title}</h1>
       <p className='project-card-description'> Description: {project.description}</p>
       <p className='project-card-organization'> Organization:{project.organization}</p> 
       <Link className='project-card-button' to={'/projects/dash/' + project.id}>More Details</Link>
     </div>
-  ))
+  ));
+
+
     
 
     return (
