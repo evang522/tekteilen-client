@@ -1,0 +1,50 @@
+.projects-container {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  margin-top:2em;
+  justify-content:center;
+}
+
+.project-card {
+  background-color:white;
+  height:15vw;
+  margin:10px;
+  width:20%;
+  display:block;
+  box-sizing:border-box;
+  padding:10px;
+  border-radius:4px;
+  border:1px solid gray;
+  box-shadow: 8px 8px 2px 1px gray;
+}
+
+.projects-title {
+  color:white;
+  margin-top:2em;
+}
+
+
+.project-card-title {
+  font-size:1.2em;
+  margin-top:1em;
+}
+
+.project-card-description {
+  margin-top:2em;
+}
+
+.project-card-organization {
+  margin-top:2em;
+}
+
+
+.project-card-button {
+  margin-top:2em;
+  border:none;
+  background-color:black;
+  padding:10px;
+  font-size:1.1em;
+  color:white;
+  text-decoration:none;
+}

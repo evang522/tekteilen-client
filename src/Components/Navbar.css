@@ -1,0 +1,32 @@
+* {
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+}
+
+
+.active-link {
+  font-weight:bold;
+}
+
+.navbar {
+  height:4em;
+  background-color:rgba(170, 170, 170, 0.062);
+}
+
+.nav-ul {
+  display:flex;
+  list-style:none;
+}
+
+.nav-li a{
+  text-decoration:none;
+  color:white;
+}
+
+.nav-li {
+  padding: 10px;
+  line-height:2em;
+  font-size:1.5em;
+  font-family: 'Roboto', sans-serif;
+}
