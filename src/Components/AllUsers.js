@@ -1,8 +1,8 @@
 import React from 'react';
 import './css/AllUsers.css'
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
-import {fetchUsers, setLoading} from '../state/actions';
+import {withRouter, Link} from 'react-router-dom';
+import {fetchUsers, getAllProjects, setLoading} from '../state/actions';
 
 
 export class AllUsers extends React.Component {
@@ -10,11 +10,13 @@ export class AllUsers extends React.Component {
   componentDidMount() {
     this.props.dispatch(setLoading());
     this.props.dispatch(fetchUsers());
+    this.props.dispatch(getAllProjects())
   }
-  
 
   render () {
-    console.log(this.props.users)
+
+    console.log(this.props.userProjects);
+
     return (
       <div className='users-container'> 
         <header>
@@ -30,6 +32,11 @@ export class AllUsers extends React.Component {
                 {user.technologies.map((skill,index) => (<li key={index}>{skill}</li>))}
               </ul>
               <p>Merit: {user.merit}</p>
+              <ul className='user-card-skills'>
+                <li><b>Projects:</b></li>
+                {this.props.projects ? this.props.projects.filter(project => Number(project.volunteers.includes(Number(user.id)))).map((project,index) => (<li key={index}><Link to={`/projects/dash/${project.id}`}>{project.title}</Link></li>)) : ''}
+                
+              </ul>
               
             </div>
           ) : 'Error Loading Users. Please try again later'}
@@ -40,9 +47,15 @@ export class AllUsers extends React.Component {
 }
 
 
-const mapStateToProps = state => ({
-  users: state.reducers.users
-})
+const mapStateToProps = state => {
+  return {
+   users: state.reducers.users,
+  //  userProjects: state.reducers.projects.filter(project => project.volunteers.includes(Number(state.reducers.userInfo.id))) 
+  projects: state.reducers.projects,
+  userInfo: state.reducers.userInfo
+  }
+}
+
 
 
 export default withRouter(connect(mapStateToProps)(AllUsers));
