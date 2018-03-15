@@ -39,8 +39,16 @@
 }
 
 
-.project-card-button {
+a.project-card-button {
   margin-top:2em;
+}
+
+
+.project-card-button {
+  margin-top:3em; 
+  width:50%;
+  margin:0 auto;
+  display:block;
   border:none;
   background-color:black;
   padding:10px;

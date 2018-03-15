@@ -20,7 +20,7 @@ export class Login extends React.Component {
 
     return (
       <div className='login-page-container'>
-        {this.props.loggedIn ? (<Redirect to='/' />) : ''}
+        {this.props.loggedIn ? (<Redirect to='/dashboard' />) : ''}
         <header className='login-page-header'>
           <h1> Login to Tekteilen</h1>
         </header>

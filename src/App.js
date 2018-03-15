@@ -17,7 +17,7 @@ export class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <Route exact path='/' component={Dashboard} />
+        <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/projects/dash/:id' component={ProjectDash} />      
         {this.props.loading ? <Loader /> : ''} 
