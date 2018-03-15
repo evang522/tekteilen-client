@@ -1,10 +1,10 @@
-import {SET_LOADING, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR} from './actions';
+import {SET_LOADING, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR} from './actions';
 
 const initialState = {
   loading: false,
   projects: [],
   appError:null,
-  authToken:null
+  authToken: localStorage.getItem('Authtoken') || null
 }
 
 export const reducers = (state = initialState, action) => {
@@ -25,6 +25,10 @@ export const reducers = (state = initialState, action) => {
   }
   if (action.type === SET_TOKEN) {
     return Object.assign({}, state, {authToken: action.token})
+  }
+  if (action.type === LOGOUT) {
+    console.log('LOGOUT reducer has been run');
+    return Object.assign({},state, {authToken:null});
   }
   return state;
 }

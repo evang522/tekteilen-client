@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {API_URL} from '../config';
 
 export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => { 
@@ -5,32 +6,18 @@ export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => {
   if (!forceUpdate && projects.length) { 
     return;
   }
-  console.log(`from the state [${getState().reducers.authToken}]`)
-  console.log(`from the localStorage [${localStorage.getItem('Authtoken')}]`);
   dispatch(setLoading());
-  return fetch(`${API_URL}/projects`, {
-    headers: {
-      // 'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`
-      // 'Authorization': `Bearer ${localStorage.getItem('Authtoken')}`,
-      'Authorization': `Bearer testtest`,
+  const fetchOptions = {
+      headers: {
+      'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`,
       'Content-Type':'application/json'
     },
-    method:'get',
-    
-  })
-    .then(response => {
-      if (response.status === 403) {
-        const err = new Error();
-        err.message = 'Not Authenticated, please Login.'
-        return Promise.reject(err);
-      }
-      console.log('server response from fetch', response);
-       response.json()
-    })
+  };
+  return axios.get(`${API_URL}/projects`, 
+      fetchOptions
+    )
     .then(projects => {
-      console.log('projects from getall', projects);
-      dispatch(populateProjects(projects))
-      console.log(getState());
+      dispatch(populateProjects(projects.data))
     })
     .catch(err => {
       err.message = err.message || 'Internal Server Error! Sorry, we\'re working to fix this a quickly as possible';
@@ -70,12 +57,19 @@ export const clearLocalStorage = () => {
   localStorage.removeItem('Authtoken');
 }
 
+export const logoutAsync = () => dispatch =>{
+  console.log('logout was called');
+    localStorage.removeItem('Authtoken');
+    dispatch(logout());
+}
+
 
 export const SET_TOKEN = 'SET_TOKEN';
 export const setToken = token => ({
   type:SET_TOKEN,
   token
 })
+
 
 export const SET_ERROR = 'SET_ERROR';
 export const setError = err => ({
@@ -105,8 +99,7 @@ export const populateProjects = (projects) => ({
 })
 
 
-// export const SET_CURRENT_PROJECT = 'SET_CURRENT_PROJECT';
-// export const setCurrentProject = (id) => ({
-//   type:SET_CURRENT_PROJECT,
-//   id
-// })
+export const LOGOUT = 'LOGOUT';
+export const logout = () => ({
+  type:LOGOUT
+})

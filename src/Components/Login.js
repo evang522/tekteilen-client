@@ -5,6 +5,7 @@ import {Field, reduxForm} from 'redux-form';
 import {required} from '../state/validators';
 import Input from '../Components/Input';
 import {login} from '../state/actions';
+import {Redirect} from 'react-router-dom';
 
 
 export class Login extends React.Component {
@@ -19,6 +20,7 @@ export class Login extends React.Component {
 
     return (
       <div className='login-page-container'>
+        {this.props.loggedIn ? (<Redirect to='/' />) : ''}
         <header className='login-page-header'>
           <h1> Login to Tekteilen</h1>
         </header>
@@ -36,12 +38,12 @@ export class Login extends React.Component {
 
 
 
-// const mapStateToProps = (state) => {
-
-// }
+const mapStateToProps = state => ({
+  loggedIn: state.reducers.authToken ? true : false
+})
 
 Login = reduxForm({
   form:'loginform'
 })(Login)
 
-export default connect()(Login);
+export default connect(mapStateToProps)(Login);
