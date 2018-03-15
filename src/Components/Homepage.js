@@ -14,6 +14,8 @@ export class Homepage extends React.Component {
         <div className='homepage-container'>
           <header>
             <h1> TekTeilen </h1>
+            <h5> Coding for Good</h5>
+            <img className='homepage-image' src='/coding-vector.jpg' alt='Programmer'/>
           </header>
         </div>
     )
