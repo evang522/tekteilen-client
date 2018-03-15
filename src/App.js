@@ -10,6 +10,7 @@ import {withRouter} from 'react-router-dom';
 import ProjectDash from './Components/ProjectDash';
 import Login from './Components/Login';
 import Dashboard from './Components/Dashboard';
+import Homepage from './Components/Homepage';
 
 
 export class App extends Component {
@@ -17,6 +18,7 @@ export class App extends Component {
     return (
       <div className="App">
         <Navbar />
+        <Route exact path='/' component={Homepage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/projects/dash/:id' component={ProjectDash} />      

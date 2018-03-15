@@ -1,11 +1,12 @@
-import {SET_LOADING, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR} from './actions';
+import {SET_LOADING, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS} from './actions';
 
 const initialState = {
   loading: false,
   projects: [],
   appError:null,
   authToken: localStorage.getItem('Authtoken') || null,
-  userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null
+  userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null,
+  users: []
 }
 
 export const reducers = (state = initialState, action) => {
@@ -29,6 +30,9 @@ export const reducers = (state = initialState, action) => {
   }
   if (action.type === LOGOUT) {
     return Object.assign({},state, {authToken:null, projects:[]});
+  }
+  if (action.type === POPULATE_USERS) {
+    return Object.assign({}, state, {users:action.users});
   }
   return state;
 }

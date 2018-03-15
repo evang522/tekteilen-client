@@ -3,3 +3,34 @@
   color:white;
   margin-top:2em;
 }
+
+
+.user-card {
+  background-color:white;
+  width:60%;
+  height:25vh;
+  margin:0 auto;
+  margin-bottom:1em;
+  margin-top:3em;
+  border-radius:3px;
+}
+
+ 
+.user-card-name {
+  color:black;
+  font-size:1.4em;
+  padding-top:1em;
+  font-weight:bold;
+}
+
+
+.user-card-skills {
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  list-style:none;
+}
+
+.user-card-skills li {
+  padding:10px;
+}

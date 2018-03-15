@@ -50,6 +50,19 @@ export const login = (credentials) => (dispatch,getState) => {
     })
 }
 
+
+export const fetchUsers = () => (dispatch, getState) => {
+  const axOptions = {
+    headers: {
+      'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`,
+    }
+  }
+  axios.get(`${API_URL}/users`, axOptions)
+    .then(response => {
+      dispatch(populateUsers(response.data));
+    })
+}
+
 export const setLocalStorage = (token) => {
   localStorage.setItem('Authtoken', token)
 }
@@ -93,10 +106,18 @@ export const setLoading = () => {
 
 
 export const POPULATE_PROJECTS = 'POPULATE_PROJECTS';
-export const populateProjects = (projects) => ({
+export const populateProjects = projects => ({
   type:POPULATE_PROJECTS,
   projects
 })
+
+
+export const POPULATE_USERS = 'POPULATE_USERS';
+export const populateUsers = users => ({
+  type:POPULATE_USERS,
+  users
+})
+
 
 
 export const LOGOUT = 'LOGOUT';
