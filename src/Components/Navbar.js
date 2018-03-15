@@ -3,19 +3,16 @@ import {NavLink, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logoutAsync} from '../state/actions'
 import './css/Navbar.css';
-import store from '../state/store';
 
 export class Navbar extends React.Component {
 
 
 
   linkOnClick() {
-    console.log('click was called');
     this.props.dispatch(logoutAsync())
   }
 
   render() {
-    console.log('props', this.props);
 
   return (
       <nav className='navbar'>

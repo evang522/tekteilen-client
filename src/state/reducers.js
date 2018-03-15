@@ -4,7 +4,8 @@ const initialState = {
   loading: false,
   projects: [],
   appError:null,
-  authToken: localStorage.getItem('Authtoken') || null
+  authToken: localStorage.getItem('Authtoken') || null,
+  userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null
 }
 
 export const reducers = (state = initialState, action) => {
@@ -24,11 +25,10 @@ export const reducers = (state = initialState, action) => {
     return Object.assign({}, state, {appError: null})
   }
   if (action.type === SET_TOKEN) {
-    return Object.assign({}, state, {authToken: action.token})
+    return Object.assign({}, state, {authToken: action.token, userInfo: JSON.parse(atob(action.token.split('.')[1]))})
   }
   if (action.type === LOGOUT) {
-    console.log('LOGOUT reducer has been run');
-    return Object.assign({},state, {authToken:null});
+    return Object.assign({},state, {authToken:null, projects:[]});
   }
   return state;
 }

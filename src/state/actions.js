@@ -43,6 +43,7 @@ export const login = (credentials) => (dispatch,getState) => {
     .then(data => {
       setLocalStorage(data.token);
       dispatch(setToken(data.token))
+      
     })
     .catch(err => {
       dispatch(setError(err));
@@ -58,7 +59,6 @@ export const clearLocalStorage = () => {
 }
 
 export const logoutAsync = () => dispatch =>{
-  console.log('logout was called');
     localStorage.removeItem('Authtoken');
     dispatch(logout());
 }
@@ -103,3 +103,4 @@ export const LOGOUT = 'LOGOUT';
 export const logout = () => ({
   type:LOGOUT
 })
+

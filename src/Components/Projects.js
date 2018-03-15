@@ -1,7 +1,7 @@
 import React from 'react';
 import {getAllProjects, setError, clearError} from '../state/actions';
 import {connect} from 'react-redux';
-import {withRouter, Link} from 'react-router-dom';
+import {withRouter, Redirect, Link} from 'react-router-dom';
 import './css/Projects.css';
 import store from '../state/store';
 
@@ -10,7 +10,6 @@ export class Projects extends React.Component{
   componentDidMount () {
     this.props.dispatch(clearError())
     if (!store.getState().reducers.authToken) {
-      console.log('error')
       const err = new Error();
       err.message='Not Authenticated, please log in.';
       return this.props.dispatch(setError(err));     
@@ -23,10 +22,10 @@ export class Projects extends React.Component{
 
 
     
-    console.log('projects in state', this.props.projects);
 
     return (
       <div className='project-dashboard-container'>
+      {this.props.loggedIn ? '' : <Redirect to='/login' />}
       <h1 className='projects-title'>
             View Available Projects
       </h1>
@@ -55,7 +54,8 @@ export class Projects extends React.Component{
 
 const mapStateToProps = state => ({
   projects: state.reducers.projects || [],
-  appError:state.reducers.appError
+  appError:state.reducers.appError,
+  loggedIn: state.reducers.authToken ? true : false 
 })
 
 export default withRouter(connect(mapStateToProps)(Projects));
