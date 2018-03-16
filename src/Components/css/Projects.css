@@ -73,3 +73,21 @@ a.project-card-button {
   margin:0 auto;
   margin-top:1em;
 }
+
+
+.create-new-project-button {
+  background-color:#EEEEEE;
+  display:block;
+  width:10em;
+  line-height:1.5em;
+  height:2.3em;
+  border:none;
+  border-radius:3px;
+  font-size:1.1em;
+  margin:0 auto;
+  text-decoration:none;
+  margin-top:1em;
+  padding:7px;
+  font-weight:bold;
+  color:black;
+}

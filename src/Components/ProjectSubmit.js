@@ -3,7 +3,8 @@ import {reduxForm, Field} from 'redux-form';
 import Input from '../Components/Input';
 import {connect} from 'react-redux';
 import {required} from '../state/validators';
-import {addProjectAsync, getAllProjects} from '../state/actions';
+import {addProjectAsync, getAllProjects, setProjectRedirect} from '../state/actions';
+import {Redirect} from 'react-router-dom';
 
 export class ProjectSubmit extends React.Component {
 
@@ -14,16 +15,17 @@ export class ProjectSubmit extends React.Component {
     }
   }
 
-
   onClick = values => {
     console.log(values);
     this.props.dispatch(addProjectAsync(values))
+    this.props.dispatch(setProjectRedirect());
   }
 
   render() {
 
     return (
       <div className='project-submit-form-container'>
+      {this.props.redirectToProjects ? <Redirect to='/projects' /> : '' }
         <section className='title'>
           <h1>Submit a Project Request</h1>
         </section>
@@ -45,7 +47,9 @@ export class ProjectSubmit extends React.Component {
 
 
 const mapStateToProps = state => ({
-  projects:state.reducers.projects
+  projects:state.reducers.projects,
+  redirectToProjects:state.reducers.redirectToProjects
+  
 })
 
 ProjectSubmit = reduxForm({
