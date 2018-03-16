@@ -16,8 +16,6 @@ export class Login extends React.Component {
 
   render() {
 
-
-
     return (
       <div className='login-page-container'>
         {this.props.loggedIn ? (<Redirect to='/dashboard' />) : ''}

@@ -1,0 +1,55 @@
+import React from 'react';
+import {reduxForm, Field} from 'redux-form';
+import Input from '../Components/Input';
+import {connect} from 'react-redux';
+import {required} from '../state/validators';
+import {addProjectAsync, getAllProjects} from '../state/actions';
+
+export class ProjectSubmit extends React.Component {
+
+  
+  componentDidMount() {
+    if (this.props.projects.length < 1) {
+      return this.props.dispatch(getAllProjects());
+    }
+  }
+
+
+  onClick = values => {
+    console.log(values);
+    this.props.dispatch(addProjectAsync(values))
+  }
+
+  render() {
+
+    return (
+      <div className='project-submit-form-container'>
+        <section className='title'>
+          <h1>Submit a Project Request</h1>
+        </section>
+        <form onClick={this.props.handleSubmit(this.onClick)}className='project-submit-form'>
+          <Field component={Input} validate={required} type='textarea' name='title' label='Project Title'/>
+          <Field component={Input} validate={required} type='text' name='description' label='Project Description' />
+          <Field component={Input} validate={required} type='text' name='skills' label='Skills Needed' />
+          <Field component={Input} validate={required} type='text' name='organization' label='Organization' />
+          <button className='submit-project-button' type='submit'>Submit</button>
+        </form>
+      </div>
+
+    )
+
+
+  }
+}
+
+
+
+const mapStateToProps = state => ({
+  projects:state.reducers.projects
+})
+
+ProjectSubmit = reduxForm({
+  form: 'projectSubmit'
+})(ProjectSubmit)
+
+export default connect(mapStateToProps)(ProjectSubmit);

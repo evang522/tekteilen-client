@@ -15,7 +15,6 @@ export class Projects extends React.Component{
       return this.props.dispatch(setError(err));     
     }
     this.props.dispatch(getAllProjects());
-
   }
 
   render() {
@@ -31,7 +30,7 @@ export class Projects extends React.Component{
         <div>
 
           <div className='projects-container'>
-          {this.props.projects.length ? this.props.projects.map(project => (
+          {this.props.projects && this.props.projects.length ? this.props.projects.map(project => (
           <div data-id={project.id} key={project.id} className='project-card'>
             <h1 className='project-card-title'> {project.title}</h1>
             <p className='project-card-description'> Description: {project.description}</p>

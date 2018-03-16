@@ -50,7 +50,7 @@ a.project-card-button {
   margin:0 auto;
   display:block;
   border:none;
-  background-color:black;
+  background-color:#167CC7;
   padding:10px;
   font-size:1.1em;
   color:white;
@@ -62,4 +62,14 @@ a.project-card-button {
   font-size:1.5em;
   margin-top:10%;
   font-family:'Courier New', Courier, monospace;
+}
+
+.submit-project-button {
+  width:9em;
+  height:2em;
+  border:none;
+  border-radius:3px;
+  font-size:1.1em;
+  margin:0 auto;
+  margin-top:1em;
 }

@@ -1,4 +1,4 @@
-import {SET_LOADING, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS} from './actions';
+import {SET_LOADING, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT} from './actions';
 
 const initialState = {
   loading: false,
@@ -6,7 +6,8 @@ const initialState = {
   appError:null,
   authToken: localStorage.getItem('Authtoken') || null,
   userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null,
-  users: []
+  users: [],
+  terrapins:['willy']
 }
 
 export const reducers = (state = initialState, action) => {
@@ -34,5 +35,12 @@ export const reducers = (state = initialState, action) => {
   if (action.type === POPULATE_USERS) {
     return Object.assign({}, state, {users:action.users});
   }
+  if (action.type === ADD_PROJECT) {
+    console.log('current state', state)
+    console.log('current projects in state', state.projects);
+    console.log('action project', action.project)
+    return Object.assign({}, state, {projects: [...state.projects, action.project]})
+  }
+
   return state;
 }

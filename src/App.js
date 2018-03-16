@@ -11,6 +11,7 @@ import ProjectDash from './Components/ProjectDash';
 import Login from './Components/Login';
 import Dashboard from './Components/Dashboard';
 import Homepage from './Components/Homepage';
+import ProjectSubmit from './Components/ProjectSubmit';
 
 
 export class App extends Component {
@@ -21,7 +22,8 @@ export class App extends Component {
         <Route exact path='/' component={Homepage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/login' component={Login} />
-        <Route exact path='/projects/dash/:id' component={ProjectDash} />      
+        <Route exact path='/projects/dash/:id' component={ProjectDash} />    
+        <Route exact path='/projects/new' component={ProjectSubmit} />  
         {this.props.loading ? <Loader /> : ''} 
         <Route exact path='/projects' component={Projects} />  
         <Route path='/users' component={AllUsers} />        

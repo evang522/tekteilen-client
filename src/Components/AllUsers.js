@@ -15,8 +15,6 @@ export class AllUsers extends React.Component {
 
   render () {
 
-    console.log(this.props.userProjects);
-
     return (
       <div className='users-container'> 
         <header>
@@ -34,7 +32,12 @@ export class AllUsers extends React.Component {
               <p>Merit: {user.merit}</p>
               <ul className='user-card-skills'>
                 <li><b>Projects:</b></li>
-                {this.props.projects ? this.props.projects.filter(project => Number(project.volunteers.includes(Number(user.id)))).map((project,index) => (<li key={index}><Link to={`/projects/dash/${project.id}`}>{project.title}</Link></li>)) : ''}
+                {this.props.projects ? this.props.projects.filter(project => { 
+                  if (project.volunteers) {
+                  return Number(project.volunteers.includes(Number(user.id)))
+                  } 
+                  return false;
+                }).map((project,index) => (<li key={index}><Link to={`/projects/dash/${project.id}`}>{project.title}</Link></li>)) : ''}
                 
               </ul>
               

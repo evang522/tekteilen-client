@@ -25,7 +25,7 @@ export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => {
     })
 }
 
-export const login = (credentials) => (dispatch,getState) => {
+export const login = credentials => (dispatch,getState) => {
   const userCreds = {
     email:credentials.email,
     password: credentials.password
@@ -77,6 +77,26 @@ export const logoutAsync = () => dispatch =>{
 }
 
 
+export const addProjectAsync = (project) => (dispatch,getState) => {
+  const headers=  {
+    'Authorization':`Bearer ${localStorage.getItem('Authtoken') || null}`,
+    'Content-Type': 'application/json'
+  }
+
+    axios({
+      method:'POST',
+      url: `${API_URL}/projects`,
+      data: JSON.stringify(project),
+      headers,
+    })
+      .then(response =>{
+
+        console.log('AXIOSRESPONSE: ', response);
+        dispatch(addProject(response.data))
+      })
+}
+
+
 export const SET_TOKEN = 'SET_TOKEN';
 export const setToken = token => ({
   type:SET_TOKEN,
@@ -116,6 +136,13 @@ export const POPULATE_USERS = 'POPULATE_USERS';
 export const populateUsers = users => ({
   type:POPULATE_USERS,
   users
+})
+
+
+export const ADD_PROJECT = 'ADD_PROJECT';
+export const addProject = project => ({
+  type:ADD_PROJECT,
+  project
 })
 
 

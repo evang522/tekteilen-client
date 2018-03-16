@@ -7,7 +7,7 @@ import {getAllProjects} from '../state/actions';
 export class Dashboard extends React.Component {
 
   componentDidMount() {
-    if (!this.props.projects.length) {
+    if (this.props.projects.length < 1) {
       return this.props.dispatch(getAllProjects());
     }
   }
@@ -53,11 +53,17 @@ export class Dashboard extends React.Component {
 }
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+  return {
   loggedIn: state.reducers.authToken ? true : false,
   userInfo: state.reducers.userInfo,
-  projects: state.reducers.projects.filter(project => project.volunteers.includes(state.reducers.userInfo.id))
+  projects: state.reducers.projects.filter(project => {
+    if (project.volunteers) {
+    return project.volunteers.includes(state.reducers.userInfo.id)
+    }
+    return false;
+  })
 
-})
-
+  }
+}
 export default withRouter(connect(mapStateToProps)(Dashboard));
