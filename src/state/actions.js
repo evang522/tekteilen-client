@@ -1,29 +1,6 @@
 import axios from 'axios';
 import {API_URL} from '../config';
 
-export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => { 
-  const {projects} = getState().reducers;
-  if (!forceUpdate && projects.length) { 
-    return;
-  }
-  dispatch(setLoading());
-  const fetchOptions = {
-      headers: {
-      'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`,
-      'Content-Type':'application/json'
-    },
-  };
-  return axios.get(`${API_URL}/projects`, 
-      fetchOptions
-    )
-    .then(projects => {
-      dispatch(populateProjects(projects.data))
-    })
-    .catch(err => {
-      err.message = err.message || 'Internal Server Error! Sorry, we\'re working to fix this a quickly as possible';
-      dispatch(setError(err));
-    })
-}
 
 export const login = credentials => (dispatch,getState) => {
   const userCreds = {
@@ -50,7 +27,7 @@ export const login = credentials => (dispatch,getState) => {
     })
 }
 
-
+//=================================== ASYNC USER ACTIONS ==================>
 export const fetchUsers = () => (dispatch, getState) => {
   const axOptions = {
     headers: {
@@ -77,6 +54,36 @@ export const logoutAsync = () => dispatch =>{
 }
 
 
+
+
+//==========================================ASYNC PROJECT ACTIONS ===================>
+
+export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => { 
+  const {projects} = getState().reducers;
+  if (!forceUpdate && projects.length) { 
+    return;
+  }
+  dispatch(setLoading());
+  const fetchOptions = {
+      headers: {
+      'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`,
+      'Content-Type':'application/json'
+    },
+  };
+  return axios.get(`${API_URL}/projects`, 
+      fetchOptions
+    )
+    .then(projects => {
+      dispatch(populateProjects(projects.data))
+    })
+    .catch(err => {
+      err.message = err.message || 'Internal Server Error! Sorry, we\'re working to fix this a quickly as possible';
+      dispatch(setError(err));
+    })
+}
+
+
+
 export const addProjectAsync = (project) => (dispatch,getState) => {
   const headers=  {
     'Authorization':`Bearer ${localStorage.getItem('Authtoken') || null}`,
@@ -96,6 +103,27 @@ export const addProjectAsync = (project) => (dispatch,getState) => {
       })
 }
 
+
+export const deleteProjectAsync = (projectId) => (dispatch, getState) => {
+  const headers=  {
+    'Authorization':`Bearer ${localStorage.getItem('Authtoken') || null}`,
+    'Content-Type': 'application/json'
+  }
+
+  axios({
+    method:'DELETE',
+    url:`${API_URL}/projects/${projectId}`,
+    headers
+  })
+  .then(response => {
+    dispatch(deleteProject(projectId));
+  })
+
+}
+
+
+
+//==================SYNC ACTIONS================================================>
 
 export const SET_TOKEN = 'SET_TOKEN';
 export const setToken = token => ({
@@ -155,6 +183,13 @@ export const addProject = project => ({
   type:ADD_PROJECT,
   project
 })
+
+export const DELETE_PROJECT = 'DELETE_PROJECT';
+export const deleteProject = projectId => ({
+  type:DELETE_PROJECT,
+  projectId
+})
+
 
 
 

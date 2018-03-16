@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './css/ProjectDash.css';
-import {getAllProjects} from '../state/actions';
-import {withRouter} from 'react-router-dom';
+import {getAllProjects, deleteProjectAsync} from '../state/actions';
+import {withRouter, Redirect, Link} from 'react-router-dom';
 
 export class ProjectDash extends React.Component {
 
@@ -10,10 +10,16 @@ export class ProjectDash extends React.Component {
     this.props.dispatch(getAllProjects());
   }
 
+  onClick() {
+    this.props.dispatch(deleteProjectAsync(this.props.project.id));
+  }
+
   render() {
     if (this.props.project) {
       return (
         <section className='project-dashboard'>
+          {this.props.loggedIn ? '' : <Redirect to='/login' />}
+          {this.props.redirectToProject ? <Redirect to='/projects' /> : ''} 
           <h1 className='project-dash-header'>{this.props.project.title}</h1>
           <br/>
           <br/>
@@ -21,12 +27,13 @@ export class ProjectDash extends React.Component {
           <br/>
           <br/>
           <p className='white-text'>Technologies: {this.props.project.technologies}</p>
+          {this.props.userInfo.isadmin ? <Link className='delete-project-button' to='/projects' onClick={() => this.onClick()}>Delete Project </Link> : ''}
         </section>
       )
     } else {
       return (
 
-      <p className='project-dash-header'>Loading</p>
+     <Redirect to='/projects' />
       
     )
     }
@@ -37,7 +44,9 @@ export class ProjectDash extends React.Component {
     project: state
       .reducers
       .projects
-      .find(project => project.id === Number(props.match.params.id))
+      .find(project => project.id === Number(props.match.params.id)),
+      userInfo: state.reducers.userInfo,
+      loggedIn: state.reducers.authToken ? true : false,
   })
 
   export default withRouter(connect(mapStateToProps)(ProjectDash));

@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/AllUsers.css'
 import {connect} from 'react-redux';
-import {withRouter, Link} from 'react-router-dom';
+import {withRouter, Redirect, Link} from 'react-router-dom';
 import {fetchUsers, getAllProjects, setLoading} from '../state/actions';
 
 
@@ -16,7 +16,8 @@ export class AllUsers extends React.Component {
   render () {
 
     return (
-      <div className='users-container'> 
+      <div className='users-container'>
+      {this.props.loggedIn ? '' : <Redirect to='/login' />}
         <header>
           <h1> All Users </h1>
         </header>
@@ -55,7 +56,8 @@ const mapStateToProps = state => {
    users: state.reducers.users,
   //  userProjects: state.reducers.projects.filter(project => project.volunteers.includes(Number(state.reducers.userInfo.id))) 
   projects: state.reducers.projects,
-  userInfo: state.reducers.userInfo
+  userInfo: state.reducers.userInfo,
+  loggedIn: state.reducers.authToken ? true : false,
   }
 }
 

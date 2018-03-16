@@ -1,13 +1,12 @@
-import {SET_LOADING, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT} from './actions';
+import {SET_LOADING, DELETE_PROJECT, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT} from './actions';
 
 const initialState = {
   loading: false,
   projects: [],
   appError:null,
   authToken: localStorage.getItem('Authtoken') || null,
-  userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null,
+  // userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null,
   users: [],
-  terrapins:['willy']
 }
 
 export const reducers = (state = initialState, action) => {
@@ -42,10 +41,13 @@ export const reducers = (state = initialState, action) => {
     return Object.assign({}, state, {redirectToProjects: false})
   }
   if (action.type === ADD_PROJECT) {
-    console.log('current state', state)
-    console.log('current projects in state', state.projects);
-    console.log('action project', action.project)
     return Object.assign({}, state, {projects: [...state.projects, action.project[0]]})
+  }
+  if (action.type === DELETE_PROJECT) {
+    return Object.assign({}, state, {projects:
+    state.projects
+      .filter(project => project.id !== action.projectId)
+    })
   }
 
   return state;

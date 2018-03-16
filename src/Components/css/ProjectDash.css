@@ -7,3 +7,22 @@
   font-size:1.2em;
   color:white;
 }
+
+
+.delete-project-button {
+  background-color:rgb(155, 11, 11);
+  color:white;
+  width:8em;
+  height:3em;
+  line-height:2em;
+  padding:8px;
+  font-size:1.1em;
+  border:none;
+  margin-top:10em;
+  text-decoration:none;
+  display:block;
+  margin:0 auto;
+  margin-top:2em;
+  font-weight:bold;
+  border-radius:4px;
+}
