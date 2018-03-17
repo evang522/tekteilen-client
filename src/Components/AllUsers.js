@@ -38,7 +38,7 @@ export class AllUsers extends React.Component {
                   return Number(project.volunteers.includes(Number(user.id)))
                   } 
                   return false;
-                }).map((project,index) => (<li key={index}><Link to={`/projects/dash/${project.id}`}>{project.title}</Link></li>)) : ''}
+                }).map((project,index) => (<li key={index}><Link to={`/projects/${project.id}`}>{project.title}</Link></li>)) : ''}
                 
               </ul>
               

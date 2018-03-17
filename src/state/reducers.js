@@ -1,12 +1,13 @@
-import {SET_LOADING, DELETE_PROJECT, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT} from './actions';
+import {SET_LOADING, DELETE_PROJECT, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE} from './actions';
 
 const initialState = {
   loading: false,
   projects: [],
   appError:null,
   authToken: localStorage.getItem('Authtoken') || null,
-  // userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null,
+  userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null,
   users: [],
+  showLogoutDialogue:false
 }
 
 export const reducers = (state = initialState, action) => {
@@ -48,6 +49,12 @@ export const reducers = (state = initialState, action) => {
     state.projects
       .filter(project => project.id !== action.projectId)
     })
+  }
+  if (action.type === SHOWLOGOUT_DIALOGUE) {
+    return Object.assign({},state, {showLogoutDialogue:true})
+  }
+  if (action.type === HIDELOGOUT_DIALOGUE) {
+    return Object.assign({},state, {showLogoutDialogue:false})
   }
 
   return state;

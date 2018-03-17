@@ -36,7 +36,7 @@ export class Projects extends React.Component{
             <h1 className='project-card-title'> {project.title}</h1>
             <p className='project-card-description'> Description: {project.description}</p>
             <p className='project-card-organization'> Organization:{project.organization}</p> 
-            <Link className='project-card-button' to={'/projects/dash/' + project.id}>More Details</Link>
+            <Link className='project-card-button' to={'/projects/' + project.id}>Open Project</Link>
           </div>)) : '' }
 
             </div>

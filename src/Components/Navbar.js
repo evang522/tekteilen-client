@@ -1,15 +1,16 @@
 import React from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {logoutAsync} from '../state/actions'
+import {showLogoutDialogue} from '../state/actions'
 import './css/Navbar.css';
 
 export class Navbar extends React.Component {
 
 
-
-  linkOnClick() {
-    this.props.dispatch(logoutAsync())
+  onClick () {
+    if (this.props.loggedIn) {
+    this.props.dispatch(showLogoutDialogue())
+    }
   }
 
   render() {
@@ -39,7 +40,7 @@ export class Navbar extends React.Component {
           </li>
           {this.props.loggedIn ? 
            ( <li className='nav-li'>
-            <a className='logout-button' onClick={e => this.linkOnClick()} >
+            <a className='logout-button' onClick={e => this.onClick()} >
               Logout
             </a>
           </li>) : 

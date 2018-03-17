@@ -50,7 +50,9 @@ export const clearLocalStorage = () => {
 
 export const logoutAsync = () => dispatch =>{
     localStorage.removeItem('Authtoken');
+    dispatch(hideLogoutDialogue());
     dispatch(logout());
+    
 }
 
 
@@ -191,7 +193,15 @@ export const deleteProject = projectId => ({
 })
 
 
+export const SHOWLOGOUT_DIALOGUE = 'SHOWLOGOUT_DIALOGUE';
+export const showLogoutDialogue = () => ({
+  type:SHOWLOGOUT_DIALOGUE
+})
 
+export const HIDELOGOUT_DIALOGUE = 'HIDELOGOUT_DIALOGUE';
+export const hideLogoutDialogue = () => ({
+  type:HIDELOGOUT_DIALOGUE
+})
 
 export const LOGOUT = 'LOGOUT';
 export const logout = () => ({
