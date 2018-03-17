@@ -6,7 +6,7 @@ import {Route} from 'react-router-dom';
 import AllUsers from './Components/AllUsers';
 import Loader from './Components/Loader';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Switch} from 'react-router-dom';
 import ProjectDash from './Components/ProjectDash';
 import Login from './Components/Login';
 import Dashboard from './Components/Dashboard';
@@ -17,7 +17,6 @@ import LogoutDialogue from './Components/LogoutDialogue';
 
 export class App extends Component {
   render() {
-    console.log('showlogout?: ', this.props.showLogoutDialogue);
     return (
       <div className="App">
         <Navbar />
@@ -25,8 +24,10 @@ export class App extends Component {
         <Route exact path='/' component={Homepage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/login' component={Login} />
-        <Route exact path='/projects/:id' component={ProjectDash} />    
-        <Route exact path='/projects/new' component={ProjectSubmit} />  
+        <Switch>
+          <Route exact path='/projects/new' component={ProjectSubmit} />  
+          <Route exact path='/projects/:id' component={ProjectDash} />    
+        </Switch>
         {this.props.loading ? <Loader /> : ''} 
         <Route exact path='/projects' component={Projects} />  
         <Route path='/users' component={AllUsers} />        

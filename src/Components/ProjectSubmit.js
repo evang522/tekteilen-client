@@ -10,6 +10,7 @@ export class ProjectSubmit extends React.Component {
 
   
   componentDidMount() {
+    console.log('visited project submit');
     if (this.props.projects.length < 1) {
       return this.props.dispatch(getAllProjects());
     }
@@ -22,7 +23,8 @@ export class ProjectSubmit extends React.Component {
   }
 
   render() {
-
+    console.log(this.props);
+    console.log('redirect?: ',this.props.redirectToProjects)
     return (
       <div className='project-submit-form-container'>
       {this.props.redirectToProjects ? <Redirect to='/projects' /> : '' }

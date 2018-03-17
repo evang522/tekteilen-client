@@ -2,13 +2,12 @@ import React from 'react';
 import './css/AllUsers.css'
 import {connect} from 'react-redux';
 import {withRouter, Redirect, Link} from 'react-router-dom';
-import {fetchUsers, getAllProjects, setLoading} from '../state/actions';
+import {fetchUsers, getAllProjects} from '../state/actions';
 
 
 export class AllUsers extends React.Component {
 
   componentDidMount() {
-    this.props.dispatch(setLoading());
     this.props.dispatch(fetchUsers());
     this.props.dispatch(getAllProjects())
   }
@@ -28,7 +27,7 @@ export class AllUsers extends React.Component {
               <p className='user-card-name'>{user.fullname}</p>
               <ul className='user-card-skills'>
                 <li><b>Skills:</b></li>
-                {user.technologies.map((skill,index) => (<li key={index}>{skill}</li>))}
+                {user.technologies.map((skill,index) => (<li className='user-technology-breadcrumb' key={index}>{skill}</li>))}
               </ul>
               <p>Merit: {user.merit}</p>
               <ul className='user-card-skills'>
