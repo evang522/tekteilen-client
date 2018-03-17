@@ -29,7 +29,7 @@ export class Projects extends React.Component{
         {
           this.props.appError ? <div className='app-error-message'>{this.props.appError}</div> : 
         <div>
-            <Link to='/projects/new' className='create-new-project-button'>+New Project </Link>
+            <Link to='/add/project' className='create-new-project-button'>+New Project </Link>
           <div className='projects-container'>
           {this.props.projects && this.props.projects.length ? this.props.projects.map(project => (
           <div data-id={project.id} key={project.id} className='project-card'>

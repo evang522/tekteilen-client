@@ -24,12 +24,12 @@ export class App extends Component {
         <Route exact path='/' component={Homepage} />
         <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/login' component={Login} />
+        <Route exact path='/add/project' component={ProjectSubmit} />  
         <Switch>
-          <Route exact path='/projects/new' component={ProjectSubmit} />  
+          <Route exact path='/projects' component={Projects} />  
           <Route exact path='/projects/:id' component={ProjectDash} />    
         </Switch>
         {this.props.loading ? <Loader /> : ''} 
-        <Route exact path='/projects' component={Projects} />  
         <Route path='/users' component={AllUsers} />        
       </div>
     );

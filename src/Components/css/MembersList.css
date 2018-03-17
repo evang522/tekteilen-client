@@ -1,0 +1,40 @@
+.members-list-container {
+  background-color:#DDDDDD;
+  width:18em;
+  min-height:4.3em;
+  border-radius:5px;
+
+}
+
+.members-list-member {
+  height:4.2em;
+  display:flex;
+  flex-direction:row;
+  padding:10px;
+  padding-top:15px;
+  background-color:#EEEEEE;
+  border-radius:5px;
+  margin:1.5px;
+  
+}
+
+
+.members-list-member h3 {
+  margin:0 auto;
+  line-height:2em;
+  padding-right:4px;
+}
+
+.name-circle {
+  background-color:maroon;
+  border-radius:2em;
+  margin-right:2em;
+  height:2.5em;
+  padding:10px;
+  width:2.5em;
+  color:white;
+}
+
+.full-name {
+  line-height:2.3em;
+}
