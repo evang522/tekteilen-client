@@ -1,9 +1,9 @@
-import {SET_LOADING, DELETE_PROJECT, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE} from './actions';
+import {SET_LOADING, DELETE_PROJECT, CLEAR_LOADING, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE} from './actions';
 
 const initialState = {
   loading: false,
   projects: [],
-  appError:null,
+  appError:{},
   authToken: localStorage.getItem('Authtoken') || null,
   userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null,
   users: [],
@@ -14,6 +14,9 @@ export const reducers = (state = initialState, action) => {
   if (action.type === SET_LOADING) {
     return Object.assign({}, state, {loading: true})
   }
+  if (action.type === CLEAR_LOADING) {
+    return Object.assign({}, state, {loading: false})
+  }
   if (action.type === POPULATE_PROJECTS) {
     return Object.assign({}, state, {
       projects: action.projects,
@@ -21,7 +24,12 @@ export const reducers = (state = initialState, action) => {
     })
   }
   if (action.type === SET_ERROR) {
-    return Object.assign({}, state, {appError: action.err.message, loading:false})
+    if (action.errorType === 'SERVER') {
+      return Object.assign({}, state, {appError: Object.assign({},state.appError, {serverError:action.err}), loading:false})
+    }
+    if (action.errorType === 'USER') {
+      return Object.assign({}, state, {userError: Object.assign({},state.appError, {userError:action.err}), loading:false})
+    }
   }
   if (action.type === CLEAR_ERROR) {
     return Object.assign({}, state, {appError: null})

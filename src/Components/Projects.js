@@ -13,7 +13,7 @@ export class Projects extends React.Component{
     if (!store.getState().reducers.authToken) {
       const err = new Error();
       err.message='Not Authenticated, please log in.';
-      return this.props.dispatch(setError(err));     
+      return this.props.dispatch(setError(err,'USER'));     
     }
     this.props.dispatch(getAllProjects());
   }
@@ -27,7 +27,7 @@ export class Projects extends React.Component{
             View Available Projects
       </h1>
         {
-          this.props.appError ? <div className='app-error-message'>{this.props.appError}</div> : 
+          this.props.serverError ? <div className='app-error-message'>{this.props.serverError}</div> : 
         <div>
             <Link to='/add/project' className='create-new-project-button'>+New Project </Link>
           <div className='projects-container'>
@@ -51,7 +51,7 @@ export class Projects extends React.Component{
 
 const mapStateToProps = state => ({
   projects: state.reducers.projects || [],
-  appError:state.reducers.appError,
+  serverError:state.reducers.appError ? state.reducers.appError.serverError : null,
   loggedIn: state.reducers.authToken ? true : false,
 })
 

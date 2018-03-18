@@ -15,16 +15,17 @@ export class Dashboard extends React.Component {
   render() {
    
    return (
-      <div className='user-dash-conatainer'>
+      <div className='user-dash-container'>
         {this.props.loggedIn ? '' : <Redirect to='/login' />}
         <header className='user-dash-header-container'>
           <h1 className='user-dash-header'>Dashboard</h1>
         </header>
         <section className='subscribed-projects'>
+          <h2>Welcome, {this.props.userInfo ? this.props.userInfo.fullname.split(' ')[0] : ''}!</h2>
           <h3> Projects You're Part of: </h3>
           <div className='project-dashboard-container'>
         {
-          this.props.appError ? <div className='app-error-message'>{this.props.appError}</div> : 
+          this.props.appError ? <div className='app-error-message'>{this.props.appError.serverError}</div> : 
         <div>
 
           <div className='projects-container'>

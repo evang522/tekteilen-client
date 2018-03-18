@@ -27,7 +27,7 @@ export class AllUsers extends React.Component {
               <p className='user-card-name'>{user.fullname}</p>
               <ul className='user-card-skills'>
                 <li><b>Skills:</b></li>
-                {user.technologies.map((skill,index) => (<li className='user-technology-breadcrumb' key={index}>{skill}</li>))}
+                {user.technologies ? user.technologies.map((skill,index) => (<li className='user-technology-breadcrumb' key={index}>{skill}</li>)) : ''}
               </ul>
               <p>Merit: {user.merit}</p>
               <ul className='user-card-skills'>

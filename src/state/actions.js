@@ -2,32 +2,9 @@ import axios from 'axios';
 import {API_URL} from '../config';
 
 
-export const login = credentials => (dispatch,getState) => {
-  const userCreds = {
-    email:credentials.email,
-    password: credentials.password
-  }
 
-  return fetch(`${API_URL}/login`,
-  {
-    method:'POST',
-    body:JSON.stringify(userCreds),
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    })
-  })
-    .then(res => res.json())
-    .then(data => {
-      setLocalStorage(data.token);
-      dispatch(setToken(data.token))
-      
-    })
-    .catch(err => {
-      dispatch(setError(err));
-    })
-}
 
-//=================================== ASYNC USER ACTIONS ==================>
+//=================================== ASYNC USER / AUTH ACTIONS ==================>
 export const fetchUsers = () => (dispatch, getState) => {
   const axOptions = {
     headers: {
@@ -55,7 +32,60 @@ export const logoutAsync = () => dispatch =>{
     
 }
 
+export const login = credentials => (dispatch,getState) => {
+  dispatch(setLoading());
+  const userCreds = {
+    email:credentials.email,
+    password: credentials.password
+  }
 
+  return fetch(`${API_URL}/login`,
+  {
+    method:'POST',
+    body:JSON.stringify(userCreds),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      dispatch(clearLoading());
+      setLocalStorage(data.token);
+      dispatch(setToken(data.token))
+      
+    })
+    .catch(err => {
+      err.message = 'Unable to contact server. We are working to resolve this ASAP. Thanks for your patience!'
+      dispatch(setError(err,'SERVER'));
+      dispatch(clearLoading());
+    })
+}
+
+
+// TODO This code is awful and needs to be redone
+export const register = credentials => dispatch => {
+  const requiredFields = ['fullname','password','email'];
+
+  requiredFields.forEach(field => {
+    if (!(field in credentials)) {
+      return 'Missing ${}'
+    }
+  });
+ const newUser = Object.assign({}, credentials);
+
+    axios({
+      url:`${API_URL}/users`,
+      headers: {
+        'Content-Type':'application/json',
+      },
+      method:'POST',
+      data: JSON.stringify(newUser)
+    })
+      .then(response => {
+        console.log('axios response to user creation', response);
+      })
+      .catch(err => console.log);
+};
 
 
 //==========================================ASYNC PROJECT ACTIONS ===================>
@@ -80,13 +110,14 @@ export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => {
     })
     .catch(err => {
       err.message = err.message || 'Internal Server Error! Sorry, we\'re working to fix this a quickly as possible';
-      dispatch(setError(err));
+      dispatch(setError(err, 'SERVER'));
+      console.log('Get All Projects Failed: ', err)
     })
 }
 
 
 
-export const addProjectAsync = (project) => (dispatch,getState) => {
+export const addProjectAsync = project => (dispatch,getState) => {
   const headers=  {
     'Authorization':`Bearer ${localStorage.getItem('Authtoken') || null}`,
     'Content-Type': 'application/json'
@@ -141,9 +172,10 @@ export const setProjectRedirect = token => ({
 
 
 export const SET_ERROR = 'SET_ERROR';
-export const setError = err => ({
+export const setError = (err,errorType) => ({
   type:SET_ERROR,
-  err
+  err,
+  errorType
 })
 
 
@@ -165,6 +197,12 @@ export const setLoading = () => {
   }
 }
 
+export const CLEAR_LOADING = 'CLEAR_LOADING';
+export const clearLoading = () => {
+  return {
+  type:CLEAR_LOADING
+  }
+}
 
 export const POPULATE_PROJECTS = 'POPULATE_PROJECTS';
 export const populateProjects = projects => ({

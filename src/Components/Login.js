@@ -17,16 +17,19 @@ export class Login extends React.Component {
   render() {
 
     return (
+      
       <div className='login-page-container'>
         {this.props.loggedIn ? (<Redirect to='/dashboard' />) : ''}
+
         <header className='login-page-header'>
           <h1> Login to Tekteilen</h1>
         </header>
+        {this.props.serverError ? <div className='app-error-message'>{this.props.serverError.message}</div> : 
         <form onSubmit={this.props.handleSubmit(this.onSubmit)}className='login-form' >
             <Field label='Email Address' validate={required} name='email' component={Input} type='text' />
             <Field label='Password' validate={required} name='password' component={Input} type='password' />
           <button className='login-submit-button' type='submit'>Submit</button>
-        </form>
+        </form> }
       </div>
     )
 
@@ -36,9 +39,13 @@ export class Login extends React.Component {
 
 
 
-const mapStateToProps = state => ({
-  loggedIn: state.reducers.authToken ? true : false
-})
+const mapStateToProps = state => {
+  console.log('appERROR: ',state.reducers.appError);
+  return {
+  loggedIn: state.reducers.authToken ? true : false,
+  serverError:state.reducers.appError? state.reducers.appError.serverError : null,
+  }
+}
 
 Login = reduxForm({
   form:'loginform'
