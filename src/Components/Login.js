@@ -4,11 +4,15 @@ import './css/Login.css';
 import {Field, reduxForm} from 'redux-form';
 import {required} from '../state/validators';
 import Input from '../Components/Input';
-import {login} from '../state/actions';
-import {Redirect} from 'react-router-dom';
+import {login, clearError} from '../state/actions';
+import {Redirect, Link} from 'react-router-dom';
 
 
 export class Login extends React.Component {
+
+  componentDidMount () {
+    this.props.dispatch(clearError());
+  }
 
   onSubmit = values => {
     this.props.dispatch(login(values));
@@ -30,6 +34,9 @@ export class Login extends React.Component {
             <Field label='Password' validate={required} name='password' component={Input} type='password' />
           <button className='login-submit-button' type='submit'>Submit</button>
         </form> }
+        <div className='register-link-container'>
+          Not signed up? <Link to='/register' className='link-to-register'> Click here to register</Link>
+          </div>
       </div>
     )
 
@@ -40,7 +47,6 @@ export class Login extends React.Component {
 
 
 const mapStateToProps = state => {
-  console.log('appERROR: ',state.reducers.appError);
   return {
   loggedIn: state.reducers.authToken ? true : false,
   serverError:state.reducers.appError? state.reducers.appError.serverError : null,

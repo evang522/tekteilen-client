@@ -6,6 +6,7 @@ import {API_URL} from '../config';
 
 //=================================== ASYNC USER / AUTH ACTIONS ==================>
 export const fetchUsers = () => (dispatch, getState) => {
+  if (getState().reducers.userInfo) {
   const axOptions = {
     headers: {
       'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`,
@@ -15,6 +16,11 @@ export const fetchUsers = () => (dispatch, getState) => {
     .then(response => {
       dispatch(populateUsers(response.data));
     })
+    .catch(err => {
+      err.message = 'Unable to contact server. We are working to resolve this ASAP. Thanks for your patience!'
+      dispatch(setError(err, 'SERVER'));
+    })
+  }
 }
 
 export const setLocalStorage = (token) => {
@@ -26,10 +32,11 @@ export const clearLocalStorage = () => {
 }
 
 export const logoutAsync = () => dispatch =>{
+    dispatch(setLoading());
     localStorage.removeItem('Authtoken');
     dispatch(hideLogoutDialogue());
     dispatch(logout());
-    
+    dispatch(clearLoading());
 }
 
 export const login = credentials => (dispatch,getState) => {
@@ -56,19 +63,21 @@ export const login = credentials => (dispatch,getState) => {
     })
     .catch(err => {
       err.message = 'Unable to contact server. We are working to resolve this ASAP. Thanks for your patience!'
-      dispatch(setError(err,'SERVER'));
-      dispatch(clearLoading());
+      dispatch(setError(err, 'SERVER'));
     })
 }
 
 
 // TODO This code is awful and needs to be redone
 export const register = credentials => dispatch => {
+  dispatch(setLoading());
   const requiredFields = ['fullname','password','email'];
 
   requiredFields.forEach(field => {
     if (!(field in credentials)) {
-      return 'Missing ${}'
+      const err = new Error();
+      err.message = 'Missing required fields';
+      return dispatch(setError(err, 'USER'));
     }
   });
  const newUser = Object.assign({}, credentials);
@@ -82,15 +91,18 @@ export const register = credentials => dispatch => {
       data: JSON.stringify(newUser)
     })
       .then(response => {
-        console.log('axios response to user creation', response);
+        dispatch(clearLoading());
       })
-      .catch(err => console.log);
+      .catch(err => {
+        dispatch(setError(err,'SERVER'))
+      })
 };
 
 
 //==========================================ASYNC PROJECT ACTIONS ===================>
 
 export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => { 
+  if (getState().reducers.userInfo) {
   const {projects} = getState().reducers;
   if (!forceUpdate && projects.length) { 
     return;
@@ -109,10 +121,11 @@ export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => {
       dispatch(populateProjects(projects.data))
     })
     .catch(err => {
-      err.message = err.message || 'Internal Server Error! Sorry, we\'re working to fix this a quickly as possible';
+      console.log(err);
+      err.message = err.message || 'Unable to contact server. We are working to resolve this ASAP. Thanks for your patience!'
       dispatch(setError(err, 'SERVER'));
-      console.log('Get All Projects Failed: ', err)
     })
+  }
 }
 
 
@@ -131,13 +144,47 @@ export const addProjectAsync = project => (dispatch,getState) => {
     })
       .then(response =>{
 
-        console.log('AXIOSRESPONSE: ', response);
         dispatch(addProject(response.data))
       })
+      .catch(err => {
+        dispatch(setError(err, 'SERVER'))
+      });
+}
+
+export const joinProjectAsync = (userId,projectId) => (dispatch, getState) => {
+  dispatch(setLoading());
+  
+  const headers=  {
+    'Authorization':`Bearer ${localStorage.getItem('Authtoken') || null}`,
+    'Content-Type': 'application/json'
+  }
+
+  console.log('Project being edited: ', projectId);
+  console.log('user id joining project: ', userId);
+  axios({
+    url:`${API_URL}/projects/${projectId}`,
+    method:'PUT',
+    data: {
+      requestType: 'addVolunteer',
+      userId
+    },
+    headers
+  })
+  .then(response => {
+    dispatch(getAllProjects(true));
+    dispatch(clearLoading());
+  })
+  .catch(err => {
+    err.message = 'You are already joined to this project!';
+    dispatch(setError(err, 'USER'));
+  });
 }
 
 
+
+
 export const deleteProjectAsync = (projectId) => (dispatch, getState) => {
+  dispatch(setLoading());
   const headers=  {
     'Authorization':`Bearer ${localStorage.getItem('Authtoken') || null}`,
     'Content-Type': 'application/json'
@@ -149,6 +196,7 @@ export const deleteProjectAsync = (projectId) => (dispatch, getState) => {
     headers
   })
   .then(response => {
+    dispatch(clearLoading());
     dispatch(deleteProject(projectId));
   })
 

@@ -17,14 +17,11 @@ export class ProjectSubmit extends React.Component {
   }
 
   onClick = values => {
-    console.log(values);
     this.props.dispatch(addProjectAsync(values))
     this.props.dispatch(setProjectRedirect());
   }
 
   render() {
-    console.log(this.props);
-    console.log('redirect?: ',this.props.redirectToProjects)
     return (
       <div className='project-submit-form-container'>
       {this.props.redirectToProjects ? <Redirect to='/projects' /> : '' }

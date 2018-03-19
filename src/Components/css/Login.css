@@ -67,3 +67,13 @@
 .form-input input {
   margin-left:15px;
 }
+
+
+.register-link-container {
+  color:white;
+  margin-top:2em;
+}
+
+.register-link-container a {
+  color:white;
+}

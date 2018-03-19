@@ -21,11 +21,11 @@ export class LogoutDialogue extends React.Component {
         <div className='page-mask'></div>
         <div className='login-dialogue-container'>
           <section>
-            <h2> Log out </h2>
+            <h2> <b> Log out</b> </h2>
             <br/>
             <p> Are you sure you want to log out? </p> 
-            <button onClick={() => this.linkOnClick()}className='log-out-confirm-button'>Log Out</button>
-            <button onClick={() => this.hideDialogue()}className='log-out-confirm-button'>Back</button>
+            <button onClick={() => this.linkOnClick()}className='log-out-confirm-button'><b>Log Out</b></button>
+            <button onClick={() => this.hideDialogue()}className='log-out-confirm-button'><b>Back</b></button>
           </section>
         </div>
       </div>

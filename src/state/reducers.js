@@ -28,11 +28,13 @@ export const reducers = (state = initialState, action) => {
       return Object.assign({}, state, {appError: Object.assign({},state.appError, {serverError:action.err}), loading:false})
     }
     if (action.errorType === 'USER') {
-      return Object.assign({}, state, {userError: Object.assign({},state.appError, {userError:action.err}), loading:false})
+      const returnValue= Object.assign({}, state, {appError: Object.assign({},state.appError, {userError:action.err}), loading:false})
+      return returnValue;
     }
   }
   if (action.type === CLEAR_ERROR) {
-    return Object.assign({}, state, {appError: null})
+    console.log('clear Error was run');
+    return Object.assign({}, state, {appError: {}})
   }
   if (action.type === SET_TOKEN) {
     return Object.assign({}, state, {authToken: action.token, userInfo: JSON.parse(atob(action.token.split('.')[1]))})

@@ -2,11 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './css/Dashboard.css';
 import {Redirect, withRouter, Link} from 'react-router-dom';
-import {getAllProjects} from '../state/actions';
+import {getAllProjects, clearError} from '../state/actions';
 
 export class Dashboard extends React.Component {
 
   componentDidMount() {
+    this.props.dispatch(clearError());
     if (this.props.projects.length < 1) {
       return this.props.dispatch(getAllProjects());
     }

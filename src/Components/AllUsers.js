@@ -2,12 +2,13 @@ import React from 'react';
 import './css/AllUsers.css'
 import {connect} from 'react-redux';
 import {withRouter, Redirect, Link} from 'react-router-dom';
-import {fetchUsers, getAllProjects} from '../state/actions';
+import {fetchUsers, clearError, getAllProjects} from '../state/actions';
 
 
 export class AllUsers extends React.Component {
 
   componentDidMount() {
+    this.props.dispatch(clearError());
     this.props.dispatch(fetchUsers());
     this.props.dispatch(getAllProjects())
   }
@@ -37,7 +38,7 @@ export class AllUsers extends React.Component {
                   return Number(project.volunteers.includes(Number(user.id)))
                   } 
                   return false;
-                }).map((project,index) => (<li key={index}><Link to={`/projects/${project.id}`}>{project.title}</Link></li>)) : ''}
+                }).map((project,index) => (<li className='projects-breadcrumbs' key={index}><Link to={`/projects/${project.id}`}>{project.title}</Link></li>)) : ''}
                 
               </ul>
               
