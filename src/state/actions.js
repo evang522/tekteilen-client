@@ -226,9 +226,69 @@ export const deleteProjectAsync = (projectId) => (dispatch, getState) => {
 
 }
 
+//==================================COMMENT ACTIONS=========================>
+
+export const getCommentsAsync = () => (dispatch,getState) => {
+    dispatch(setLoading());
+    const fetchOptions = {
+        headers: {
+        'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`,
+        'Content-Type':'application/json'
+      },
+    };
+    return axios.get(`${API_URL}/comments`, 
+        fetchOptions
+      )
+      .then(comments => {
+        dispatch(populateComments(comments.data))
+        dispatch(clearLoading());
+      })
+      .catch(err => {
+        console.log(err);
+        err.message = err.message || 'Unable to contact server. We are working to resolve this ASAP. Thanks for your patience!'
+        dispatch(setError(err, 'SERVER'));
+      })
+}
+  
+
+export const addCommentAsync = (userId,projectId, commentBody) => (dispatch, getState) => {
+  console.log(userId, projectId, commentBody);
+
+  dispatch(setLoading());
+    const headers =  {
+      'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`,
+      'Content-Type':'application/json'
+    };
+
+
+
+  return axios({
+    url:`${API_URL}/comments`,
+    headers,
+    data: {
+      userId,
+      projectId,
+      commentBody
+    },
+    method:'POST'
+  })
+  .then(data => {
+    dispatch(getCommentsAsync());
+    dispatch(clearLoading());
+  })
+
+}
+
 
 
 //==================SYNC ACTIONS================================================>
+
+export const POPULATE_COMMENTS = 'POPULATE_COMMENTS';
+export const populateComments = comments => ({
+  type:POPULATE_COMMENTS,
+  comments
+})
+
 
 export const SET_TOKEN = 'SET_TOKEN';
 export const setToken = token => ({

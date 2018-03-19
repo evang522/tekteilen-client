@@ -4,8 +4,6 @@ import './css/MembersList.css';
 export class MembersList extends React.Component{
 
     render() {
-      console.log('members component re-rendered');
-      console.log('volunteers: ', this.props.project ? this.props.project.volunteers : '');
       
     const projectMembers = this.props.project.volunteers && this.props.users ? this.props.users.filter(user => {
       return this.props.project.volunteers.includes(Number(user.id));
@@ -14,7 +12,7 @@ export class MembersList extends React.Component{
       <div className='members-list-container'>
         <ul>
         <li className='members-list-member'>
-          <h3>Members</h3>
+          <h3>Members: {projectMembers.length=== 0 ? 'Nobody\'s Here!' : projectMembers.length}</h3>
         </li>
         {projectMembers ? projectMembers.map(member => {
           return (

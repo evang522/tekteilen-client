@@ -1,4 +1,4 @@
-import {SET_LOADING, DELETE_PROJECT, CLEAR_LOADING, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE} from './actions';
+import {SET_LOADING, POPULATE_COMMENTS, DELETE_PROJECT, CLEAR_LOADING, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE} from './actions';
 
 const initialState = {
   loading: false,
@@ -7,7 +7,8 @@ const initialState = {
   authToken: localStorage.getItem('Authtoken') || null,
   userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null,
   users: [],
-  showLogoutDialogue:false
+  showLogoutDialogue:false,
+  comments: []
 }
 
 export const reducers = (state = initialState, action) => {
@@ -32,8 +33,10 @@ export const reducers = (state = initialState, action) => {
       return returnValue;
     }
   }
+  if (action.type===POPULATE_COMMENTS) {
+    return Object.assign({},state, {comments: action.comments})
+  }
   if (action.type === CLEAR_ERROR) {
-    console.log('clear Error was run');
     return Object.assign({}, state, {appError: {}})
   }
   if (action.type === SET_TOKEN) {

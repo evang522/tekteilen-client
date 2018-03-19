@@ -4,6 +4,7 @@ import './css/ProjectDash.css';
 import {getAllProjects, deleteProjectAsync, leaveProjectAsync, joinProjectAsync, fetchUsers} from '../state/actions';
 import {withRouter, Redirect, Link} from 'react-router-dom';
 import {MembersList} from '../Components/MembersList';
+import CommentBoard from './CommentBoard';
 
 export class ProjectDash extends React.Component {
 
@@ -40,10 +41,13 @@ export class ProjectDash extends React.Component {
             <br/>
             <p className='white-text'>Technologies: {this.props.project.technologies}</p>
             {this.props.appError.userError ? <div className='user-error-dialogue'>{this.props.appError.userError.response.data.message}</div> : ''}
+            <div className='project-dash-button-container'>
             {this.props.userInfo.isadmin ? <Link className='delete-project-button' to='/projects' onClick={() => this.onClick()}>Delete Project </Link> : ''}
             <button className='join-project-button' onClick={() => this.joinProject()}>Join Project </button>
             <button className='leave-project-button' onClick={() => this.leaveProject()}>Leave Project </button>
+            </div>
             <MembersList project={this.props.project} users={this.props.users}/>
+            <CommentBoard project={this.props.project} />
           </section>
         )
       }

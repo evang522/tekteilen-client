@@ -1,5 +1,7 @@
 .project-dash-header {
   color:white;
+  margin-top:2em;
+  font-size:2em;
 }
 
 
@@ -13,10 +15,10 @@
   background-color:rgb(155, 11, 11);
   color:white;
   width:8em;
-  height:3em;
-  line-height:2em;
+  height:2.5em;
+  line-height:1.6em;
   padding:8px;
-  font-size:1.1em;
+  font-size:1em;
   border:none;
   margin-top:10em;
   text-decoration:none;
@@ -32,10 +34,10 @@
   background-color:rgb(48, 134, 14);
   color:white;
   width:8em;
-  height:3em;
-  line-height:2em;
+  height:2.5em;
+  line-height:1.6em;
   padding:8px;
-  font-size:1.1em;
+  font-size:1em;
   border:none;
   margin-top:10em;
   text-decoration:none;
@@ -64,10 +66,10 @@
     background-color:rgb(224, 160, 21);
     color:white;
     width:8em;
-    height:3em;
-    line-height:2em;
+    height:2.5em;
+    line-height:1.6em;
     padding:8px;
-    font-size:1.1em;
+    font-size:1em;
     border:none;
     margin-top:10em;
     text-decoration:none;
@@ -79,3 +81,12 @@
     cursor:pointer;
   
 }
+
+.project-dash-button-container {
+  display:flex;
+  width:27em;
+  justify-content: center;
+  margin:0 auto;
+
+}
+
