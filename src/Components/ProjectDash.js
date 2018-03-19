@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './css/ProjectDash.css';
-import {getAllProjects, deleteProjectAsync, clearError, joinProjectAsync, fetchUsers} from '../state/actions';
+import {getAllProjects, deleteProjectAsync, leaveProjectAsync, joinProjectAsync, fetchUsers} from '../state/actions';
 import {withRouter, Redirect, Link} from 'react-router-dom';
 import {MembersList} from '../Components/MembersList';
 
@@ -18,9 +18,12 @@ export class ProjectDash extends React.Component {
 
   joinProject () {
     this.props.dispatch(joinProjectAsync(this.props.userInfo.id, this.props.project.id));
-    this.props.dispatch(getAllProjects());    
   }
   
+  leaveProject () {
+    this.props.dispatch(leaveProjectAsync(this.props.userInfo.id, this.props.project.id));
+    this.props.dispatch(getAllProjects());    
+  }
 
   render() {
       let output = null;
@@ -39,6 +42,7 @@ export class ProjectDash extends React.Component {
             {this.props.appError.userError ? <div className='user-error-dialogue'>{this.props.appError.userError.response.data.message}</div> : ''}
             {this.props.userInfo.isadmin ? <Link className='delete-project-button' to='/projects' onClick={() => this.onClick()}>Delete Project </Link> : ''}
             <button className='join-project-button' onClick={() => this.joinProject()}>Join Project </button>
+            <button className='leave-project-button' onClick={() => this.leaveProject()}>Leave Project </button>
             <MembersList project={this.props.project} users={this.props.users}/>
           </section>
         )

@@ -159,8 +159,6 @@ export const joinProjectAsync = (userId,projectId) => (dispatch, getState) => {
     'Content-Type': 'application/json'
   }
 
-  console.log('Project being edited: ', projectId);
-  console.log('user id joining project: ', userId);
   axios({
     url:`${API_URL}/projects/${projectId}`,
     method:'PUT',
@@ -180,6 +178,32 @@ export const joinProjectAsync = (userId,projectId) => (dispatch, getState) => {
   });
 }
 
+export const leaveProjectAsync = (userId,projectId) => (dispatch, getState) => {
+  dispatch(setLoading());
+  
+  const headers=  {
+    'Authorization':`Bearer ${localStorage.getItem('Authtoken') || null}`,
+    'Content-Type': 'application/json'
+  }
+
+  axios({
+    url:`${API_URL}/projects/${projectId}`,
+    method:'PUT',
+    data: {
+      requestType: 'removeVolunteer',
+      userId
+    },
+    headers
+  })
+  .then(response => {
+    dispatch(getAllProjects(true));
+    dispatch(clearLoading());
+  })
+  .catch(err => {
+    console.log(err);
+    dispatch(setError(err, 'USER'));
+  });
+}
 
 
 

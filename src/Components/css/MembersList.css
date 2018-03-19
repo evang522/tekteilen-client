@@ -2,8 +2,12 @@
   background-color:#DDDDDD;
   width:18em;
   min-height:4.3em;
+  max-height:40em;
   border-radius:5px;
-
+  position:fixed;
+  right:0;
+  top:20vh;
+  overflow-y: auto;
 }
 
 .members-list-member {
