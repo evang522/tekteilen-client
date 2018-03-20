@@ -27,10 +27,11 @@
   margin:0 auto;
   line-height:2em;
   padding-right:4px;
+  color:#043049;
 }
 
 .name-circle {
-  background-color:maroon;
+  background-color:#E67A59;
   border-radius:2em;
   margin-right:2em;
   height:2.5em;
@@ -41,4 +42,5 @@
 
 .full-name {
   line-height:2.3em;
+  color:#043049;
 }

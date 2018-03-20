@@ -34,7 +34,7 @@ export class ProjectSubmit extends React.Component {
         <form onClick={this.props.handleSubmit(this.onClick)}className='project-submit-form'>
           <Field component={Input} validate={required} type='text' name='title' label='Project Title'/>
           <Field element='textarea' component={Input} validate={required} type='text' name='description' label='Project Description' />
-          <Field component={Input} placeholder='Please use comma separated values' validate={required} type='text' name='technologies' label='Technologies Needed' />
+          <Field component={Input} validate={required} type='text' name='technologies' label='Technologies Needed (Comma Separated Values)' />
           <Field component={Input}  validate={required} type='text' name='organization' label='Organization' />
           <button className='submit-project-button' type='submit'>Submit</button>
         </form>

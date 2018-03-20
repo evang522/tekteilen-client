@@ -11,17 +11,18 @@
 
 .navbar {
   height:4em;
-  background-color:rgba(38, 154, 248, 0.589);
+  background-color:#9be2df;
 }
 
 .nav-ul {
   display:flex;
   list-style:none;
+  margin-left:10px;
 }
 
 .nav-li a{
   text-decoration:none;
-  color:white;
+  color:#043049;
 }
 
 .nav-li {
@@ -36,8 +37,15 @@
 }
 
 
+  .app-logo {
+    color:#FA6E59 !important;
+    font-weight:.999;
+  }
+
+
 @media only screen and (max-width: 600px) {
   .nav-li {
     font-size:1em;
   }
 }
+

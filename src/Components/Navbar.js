@@ -19,7 +19,7 @@ export class Navbar extends React.Component {
       <nav className='navbar'>
         <ul className='nav-ul'>
           <li className='nav-li'>
-            <NavLink activeClassName='active-link' to='/'>
+            <NavLink activeClassName='active-link app-logo' to='/'>
               TekTeilen
             </NavLink>
           </li>

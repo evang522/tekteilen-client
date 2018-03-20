@@ -24,42 +24,49 @@ export class CommentBoard extends React.Component {
   }
   
   render () {
-    
-    console.log('comments', this.props.comments);
 
-    return (
-      <div className='comment-board'>
-        <section className='comment-board-label'>
-          Discussion
-        </section>
-        {this.props.comments ? this.props.comments.filter(comment => {
-          return comment.project_id === this.props.project.id;
-        })
-        .map(comment => {
-          return (
-            <div key={comment.id} className='comment'>
-              <div className='comment-author'>
-                {comment.author + ':'}
-              </div>
-              <div className='comment-body'>
-                {comment.message}
-                <Moment className='moment-format' format="MMMM Do YYYY, h:mm a">{comment.date}</Moment>
-                
-              </div>
-              {/* <div className='comment-delete-link'>
-                delete
-              </div> */}
-            </div>
-          )
-        }) : ''}
-        <div className='add-comment-container'>
-         <form onSubmit={this.props.handleSubmit(this.addComment)}className='add-comment-form'>
-           <Field className='comment-input' name='commentBody' cols='50' component='textarea'/>
-          <button type='submit' className='add-comment-button'>
-          Add Comment
-        </button>
-          </form>
+
+    const projectComments = this.props.comments ? this.props.comments.filter(comment => {
+      return comment.project_id === this.props.project.id;
+    })
+    .map(comment => {
+      return (
+        <div key={comment.id} className='comment'>
+          <div className='comment-author'>
+            {comment.author + ':'}
+          </div>
+          <div className='comment-body'>
+            {comment.message}
+            <Moment className='moment-format' format="MMMM Do YYYY, h:mm a">{comment.date}</Moment>
+            
+          </div>
+          {/* <div className='comment-delete-link'>
+            delete
+          </div> */}
         </div>
+      )
+    }) : '';
+
+
+    const comments = projectComments.length > 0 ? projectComments : (<div className='no-comments-message'>No discussion here yet!</div>);
+
+  console.log(projectComments, comments);
+    return (
+      <div className='comment-board-container'>
+        <div className='comment-board'>
+          <div className='comment-board-header'>
+            Discussion Board
+            </div>
+          {comments}
+        </div>
+          <div className='add-comment-container'>
+          <form onSubmit={this.props.handleSubmit(this.addComment)}className='add-comment-form'>
+            <Field className='comment-input' name='commentBody' component='textarea'/>
+            <button type='submit' className='add-comment-button'>
+            Add Comment
+          </button>
+            </form>
+          </div>
       </div>
     )
   }

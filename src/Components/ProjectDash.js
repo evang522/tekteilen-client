@@ -34,17 +34,33 @@ export class ProjectDash extends React.Component {
             {this.props.loggedIn ? '' : <Redirect to='/login' />}
             {this.props.redirectToProject ? <Redirect to='/projects' /> : ''} 
             <h1 className='project-dash-header'>{this.props.project.title}</h1>
+            <div className='divider'></div>
             <br/>
             <br/>
-            <p className='white-text project-description'>Description: {this.props.project.description}</p>
-            <br/>
-            <br/>
-            <p className='white-text'>Technologies: {this.props.project.technologies}</p>
-            {this.props.appError.userError ? <div className='user-error-dialogue'>{this.props.appError.userError.response.data.message}</div> : ''}
-            <div className='project-dash-button-container'>
-            {this.props.userInfo.isadmin ? <Link className='delete-project-button' to='/projects' onClick={() => this.onClick()}>Delete Project </Link> : ''}
-            <button className='join-project-button' onClick={() => this.joinProject()}>Join Project </button>
-            <button className='leave-project-button' onClick={() => this.leaveProject()}>Leave Project </button>
+            <div className='project-dash-info-container'>
+              <p className='project-description'>
+                <div className='project-description-label'>Description:
+                </div>
+                <br/>
+                <div className='project-description-text'>
+                 {this.props.project.description}
+                 </div>
+              </p>
+              <br/>
+              <br/>
+              <p className='proejct-technologies-list'>
+              <div className='project-description-label'>
+              Technologies: 
+              </div>
+                <br/>
+                {this.props.project.technologies}
+              </p>
+              {this.props.appError.userError ? <div className='user-error-dialogue'>{this.props.appError.userError.response.data.message}</div> : ''}
+              <div className='project-dash-button-container'>
+              {this.props.userInfo.isadmin ? <Link className='delete-project-button' to='/projects' onClick={() => this.onClick()}>Delete Project </Link> : ''}
+              <button className='join-project-button' onClick={() => this.joinProject()}>Join Project </button>
+              <button className='leave-project-button' onClick={() => this.leaveProject()}>Leave Project </button>
+              </div>
             </div>
             <MembersList project={this.props.project} users={this.props.users}/>
             <CommentBoard project={this.props.project} />

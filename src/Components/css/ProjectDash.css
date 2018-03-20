@@ -1,9 +1,17 @@
 .project-dash-header {
-  color:white;
+  color:rgb(250, 110, 89);
   margin-top:2em;
-  font-size:2em;
+  font-size:3em;
+  
 }
 
+.divider {
+  background-color: rgb(250, 110, 89);
+  height:.15em;
+  width:25em;
+  margin:0 auto;
+  margin-top:15px;
+}
 
 .white-text {
   font-size:1.2em;
@@ -12,14 +20,14 @@
 
 
 .delete-project-button {
-  background-color:rgb(155, 11, 11);
-  color:white;
+  color:#9BE2DF;
+  border:1px solid #9BE2DF;
   width:8em;
   height:2.5em;
-  line-height:1.6em;
+  line-height:1.5em;
   padding:8px;
+  padding-left:14px;
   font-size:1em;
-  border:none;
   margin-top:10em;
   text-decoration:none;
   display:block;
@@ -30,15 +38,23 @@
 }
 
 
+.project-description {
+  line-height:1.45em;
+}
+
+.project-description-text {
+  width:40em;
+}
+
 .join-project-button {
-  background-color:rgb(48, 134, 14);
-  color:white;
+  color:#9BE2DF;
+  border:1px solid #9BE2DF;
+  background-color:#043049 !important;
   width:8em;
   height:2.5em;
   line-height:1.6em;
   padding:8px;
   font-size:1em;
-  border:none;
   margin-top:10em;
   text-decoration:none;
   display:block;
@@ -63,14 +79,14 @@
 }
 
 .leave-project-button {
-    background-color:rgb(224, 160, 21);
-    color:white;
+  color:#9BE2DF;
+  border:1px solid #9BE2DF;
+  background-color:#043049 !important;
     width:8em;
     height:2.5em;
     line-height:1.6em;
     padding:8px;
     font-size:1em;
-    border:none;
     margin-top:10em;
     text-decoration:none;
     display:block;
@@ -82,11 +98,37 @@
   
 }
 
+.leave-project-button:hover {
+  background-color: #255774 !important;
+}
+
+.join-project-button:hover {
+  background-color: #255774 !important;
+}
+
+.delete-project-button:hover {
+  background-color: #255774 !important;
+}
+
 .project-dash-button-container {
   display:flex;
-  width:27em;
-  justify-content: center;
-  margin:0 auto;
+  width:25em;
+  justify-content: left;
 
 }
 
+
+
+.project-description-label {
+  margin-bottom: -.5em;
+  font-size:1.6em;
+  font-weight:lighter;
+  
+}
+
+.project-dash-info-container {
+  width:65%;
+  margin:0 auto;
+  text-align:left;
+  color:#9BE2DF !important;
+}

@@ -3,7 +3,13 @@
   font-size:3em;
 }
 
+.homepage-container h1{
+  color:#E67A59;
+}
+
+.homepage-container h5{
+}
 
 .homepage-image {
-  margin-top:2em;
+  margin-top:1.8em;
 }
