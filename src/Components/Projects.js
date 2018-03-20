@@ -1,5 +1,5 @@
 import React from 'react';
-import {getAllProjects, setError, clearRedirects, clearError} from '../state/actions';
+import {getAllProjects, setError, clearError, clearRedirects} from '../state/actions';
 import {connect} from 'react-redux';
 import {withRouter, Redirect, Link} from 'react-router-dom';
 import './css/Projects.css';
@@ -10,6 +10,7 @@ export class Projects extends React.Component{
   componentDidMount () {
     this.props.dispatch(clearRedirects());
     this.props.dispatch(clearError())
+    // TODO GET RID OF THIS MAYBE...
     if (!store.getState().reducers.authToken) {
       const err = new Error();
       err.message='Not Authenticated, please log in.';

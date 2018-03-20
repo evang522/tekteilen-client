@@ -4,8 +4,8 @@
   width:100%;
   position:fixed;
   bottom:0;
-  resize: horizontal;
   overflow-y:scroll;
+  overflow-x:hidden;
 }
 
 .comment-board-label {
@@ -29,6 +29,9 @@
 
 .comment-body {
   margin-left:5px;
+  text-align:left;
+  max-width:90em;
+  word-wrap:break-word;
 }
 
 
@@ -51,3 +54,26 @@
   font-size:1em;
 }
 
+
+
+.comment-delete-link {
+  position:absolute;
+  right:5.5%;
+  background-color:maroon;
+  padding:4px;
+  border-radius:3px;
+  margin-top:-3px;
+  cursor:pointer;
+}
+
+
+.comment-input {
+  height:3em;
+}
+
+.add-comment-form {
+  display:flex;
+  align-items:center;
+  width:100%;
+  justify-content:center;
+}

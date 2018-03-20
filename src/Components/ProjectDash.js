@@ -36,7 +36,7 @@ export class ProjectDash extends React.Component {
             <h1 className='project-dash-header'>{this.props.project.title}</h1>
             <br/>
             <br/>
-            <p className='white-text'>Description: {this.props.project.description}</p>
+            <p className='white-text project-description'>Description: {this.props.project.description}</p>
             <br/>
             <br/>
             <p className='white-text'>Technologies: {this.props.project.technologies}</p>

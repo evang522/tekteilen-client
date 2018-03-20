@@ -44,14 +44,18 @@ export class CommentBoard extends React.Component {
               <div className='comment-body'>
                 {comment.message}
                 <Moment className='moment-format' format="MMMM Do YYYY, h:mm a">{comment.date}</Moment>
+                
               </div>
+              {/* <div className='comment-delete-link'>
+                delete
+              </div> */}
             </div>
           )
         }) : ''}
         <div className='add-comment-container'>
          <form onSubmit={this.props.handleSubmit(this.addComment)}className='add-comment-form'>
-           <Field name='commentBody' component='textarea'/>
-        <button type='submit' className='add-comment-button'>
+           <Field className='comment-input' name='commentBody' cols='50' component='textarea'/>
+          <button type='submit' className='add-comment-button'>
           Add Comment
         </button>
           </form>

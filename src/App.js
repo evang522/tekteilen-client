@@ -31,9 +31,7 @@ export class App extends Component {
         <div>
         <Navbar /> 
         <div className='app-error-message'>{this.props.serverError.message}</div></div> : 
-      
       <div className="App">
-
         <Navbar />
         {this.props.showLogoutDialogue ? <LogoutDialogue/> : ''}
         <Route exact path='/register' component={RegisterForm} />
