@@ -321,6 +321,16 @@ export const clearRedirects = () => ({
   type:CLEAR_REDIRECTS
 })
 
+export const CONFIRM_DELETE = 'CONFIRM_DELETE';
+export const confirmDelete = () => ({
+  type:CONFIRM_DELETE
+})
+
+export const HIDE_CONFIRM_DELETE = "HIDE_CONFIRM_DELETE";
+export const hideConfirmDelete = () => ({
+  type:HIDE_CONFIRM_DELETE
+})
+
 
 export const SET_LOADING = 'SET_LOADING';
 export const setLoading = () => {

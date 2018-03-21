@@ -30,7 +30,6 @@ export class CommentBoard extends React.Component {
       return comment.project_id === this.props.project.id;
     })
     .map(comment => {
-      console.log('COMMENT: ',comment.date);
       return (
         <div key={comment.id} className='comment'>
           <div className='comment-author'>

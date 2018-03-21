@@ -19,7 +19,7 @@ export class LogoutDialogue extends React.Component {
     return(
       <div className='pagemask-container'>
         <div className='page-mask'></div>
-        <div className='login-dialogue-container'>
+        <div className='dialogue-container'>
           <section>
             <h2> <b> Log out</b> </h2>
             <br/>

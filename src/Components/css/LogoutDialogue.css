@@ -1,4 +1,4 @@
-.login-dialogue-container {
+.dialogue-container {
  width:50%;
  height:12em;
  background-color:white;
@@ -15,7 +15,7 @@ transform: translate(-50%, -90%);
 }
 
 
-.login-dialogue-container button{
+.dialogue-container button{
   width:7em;
   padding:5px;
   border:none;

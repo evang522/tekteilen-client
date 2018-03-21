@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './css/ProjectDash.css';
-import {getAllProjects, deleteProjectAsync, leaveProjectAsync, joinProjectAsync, fetchUsers} from '../state/actions';
-import {withRouter, Redirect, Link} from 'react-router-dom';
+import {getAllProjects, deleteProjectAsync, confirmDelete, leaveProjectAsync, joinProjectAsync, fetchUsers} from '../state/actions';
+import {withRouter, Redirect} from 'react-router-dom';
 import {MembersList} from '../Components/MembersList';
 import CommentBoard from './CommentBoard';
+import ConfirmDelete from './ConfirmDelete';
 
 export class ProjectDash extends React.Component {
 
@@ -26,7 +27,12 @@ export class ProjectDash extends React.Component {
     this.props.dispatch(getAllProjects());    
   }
 
+  showDeleteProject () {
+    this.props.dispatch(confirmDelete());
+  }
+
   render() {
+    console.log('redirect?: ',this.props.redirectToProject);
       let output = null;
       if (this.props.project) {
         output = (
@@ -57,13 +63,14 @@ export class ProjectDash extends React.Component {
               </p>
               {this.props.appError.userError ? <div className='user-error-dialogue'>{this.props.appError.userError.response.data.message}</div> : ''}
               <div className='project-dash-button-container'>
-              {this.props.userInfo.isadmin ? <Link className='delete-project-button' to='/projects' onClick={() => this.onClick()}>Delete Project </Link> : ''}
+              {this.props.userInfo.isadmin ? <button className='delete-project-button' to='/projects' onClick={() => this.showDeleteProject()}>Remove</button> : ''}
               <button className='join-project-button' onClick={() => this.joinProject()}>Join Project </button>
               <button className='leave-project-button' onClick={() => this.leaveProject()}>Leave Project </button>
               </div>
             </div>
             <MembersList project={this.props.project} users={this.props.users}/>
             <CommentBoard project={this.props.project} />
+            {this.props.showConfirmDelete ? <ConfirmDelete currentProject = {this.props.project.id}/> : '' }
           </section>
         )
       }
@@ -82,7 +89,9 @@ export class ProjectDash extends React.Component {
       userInfo: state.reducers.userInfo,
       loggedIn: state.reducers.authToken ? true : false,
       users:state.reducers.users,
-      appError: state.reducers.appError
+      appError: state.reducers.appError,
+      showConfirmDelete:state.reducers.showConfirmDelete,
+      redirectToProject:state.reducers.redirectToProjects
     }
   };
 

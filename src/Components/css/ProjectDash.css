@@ -22,6 +22,7 @@
 .delete-project-button {
   color:#9BE2DF;
   border:1px solid #9BE2DF;
+  background-color:#043049 !important;
   width:8em;
   height:2.5em;
   line-height:1.5em;

@@ -1,4 +1,4 @@
-import {SET_LOADING, POPULATE_COMMENTS, DELETE_PROJECT, CLEAR_LOADING, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE} from './actions';
+import {SET_LOADING, CONFIRM_DELETE, HIDE_CONFIRM_DELETE, POPULATE_COMMENTS, DELETE_PROJECT, CLEAR_LOADING, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE} from './actions';
 
 const initialState = {
   loading: false,
@@ -8,7 +8,9 @@ const initialState = {
   userInfo: localStorage.getItem('Authtoken') ? JSON.parse(atob(localStorage.getItem('Authtoken').split('.')[1])) : null,
   users: [],
   showLogoutDialogue:false,
-  comments: []
+  comments: [],
+  showConfirmDelete:false,
+  redirectToProjects:false
 }
 
 export const reducers = (state = initialState, action) => {
@@ -32,6 +34,12 @@ export const reducers = (state = initialState, action) => {
       const returnValue= Object.assign({}, state, {appError: Object.assign({},state.appError, {userError:action.err}), loading:false})
       return returnValue;
     }
+  }
+  if (action.type===CONFIRM_DELETE) {
+    return Object.assign({}, state, {showConfirmDelete:true});
+  }
+  if (action.type===HIDE_CONFIRM_DELETE) {
+    return Object.assign({}, state, {showConfirmDelete:false});
   }
   if (action.type===POPULATE_COMMENTS) {
     return Object.assign({},state, {comments: action.comments})
