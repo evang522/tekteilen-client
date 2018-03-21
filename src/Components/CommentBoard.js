@@ -7,8 +7,6 @@ import Moment from 'react-moment';
 
 export class CommentBoard extends React.Component {
 
-
-
   componentDidMount () {
     this.props.dispatch(clearError())
     this.props.dispatch(getCommentsAsync());

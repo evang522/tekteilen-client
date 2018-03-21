@@ -3,7 +3,7 @@ import {getAllProjects, setError, clearError, clearRedirects} from '../state/act
 import {connect} from 'react-redux';
 import {withRouter, Redirect, Link} from 'react-router-dom';
 import './css/Projects.css';
-import store from '../state/store';
+// import store from '../state/store';
 
 export class Projects extends React.Component{
 
@@ -11,11 +11,11 @@ export class Projects extends React.Component{
     this.props.dispatch(clearRedirects());
     this.props.dispatch(clearError())
     // TODO GET RID OF THIS MAYBE...
-    if (!store.getState().reducers.authToken) {
-      const err = new Error();
-      err.message='Not Authenticated, please log in.';
-      return this.props.dispatch(setError(err,'USER'));     
-    }
+    // if (!store.getState().reducers.authToken) {
+    //   const err = new Error();
+    //   err.message='Not Authenticated, please log in.';
+    //   return this.props.dispatch(setError(err,'USER'));     
+    // }
     this.props.dispatch(getAllProjects());
   }
 
