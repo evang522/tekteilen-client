@@ -22,7 +22,7 @@ export class Dashboard extends React.Component {
           <h1 className='user-dash-header'>Dashboard</h1>
         </header>
         <section className='subscribed-projects'>
-          <h2>Welcome, {this.props.userInfo ? this.props.userInfo.fullname.split(' ')[0] : ''}!</h2>
+          <h2 className='white-text'>Welcome, {this.props.userInfo ? this.props.userInfo.fullname.split(' ')[0] : ''}!</h2>
           <h3> Projects You're Part of: </h3>
           <div className='project-dashboard-container'>
         {

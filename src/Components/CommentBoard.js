@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {clearError, addCommentAsync, getCommentsAsync} from '../state/actions';
+import {clearError, addCommentAsync, deleteComment, getCommentsAsync} from '../state/actions';
 import {reduxForm, Field} from 'redux-form';
 import './css/CommentBoard.css';
 import Moment from 'react-moment';
@@ -23,6 +23,13 @@ export class CommentBoard extends React.Component {
     values.commentBody = '';
   }
   
+  deleteComment = (id)  => {
+    let commentId = id;
+    this.props.dispatch(deleteComment(id))
+    console.log(commentId);
+  }
+
+
   render () {
 
 
@@ -40,9 +47,9 @@ export class CommentBoard extends React.Component {
             <Moment className='moment-format' format="MMMM Do YYYY, h:mm a">{comment.date}</Moment>
             
           </div>
-          {/* <div className='comment-delete-link'>
+          <div onClick={() => this.deleteComment(comment.id)} className='comment-delete-link'>
             delete
-          </div> */}
+          </div>
         </div>
       )
     }) : '';

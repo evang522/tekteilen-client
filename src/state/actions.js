@@ -279,6 +279,27 @@ export const addCommentAsync = (userId,projectId, commentBody) => (dispatch, get
 
 }
 
+export const deleteComment = (commentId) => (dispatch, getState) => {
+  dispatch(setLoading());
+  const axiosOptions = {
+    url: `${API_URL}/comments/${commentId}`,
+    headers: {
+      'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`,
+      'Content-Type':'application/json'
+    },
+    method:'DELETE'
+  }
+  return axios(axiosOptions)
+    .then(() => {
+      dispatch(getCommentsAsync());
+      dispatch(clearLoading());
+    })
+    .catch(err => {
+      dispatch(setError(err, 'USER'))
+      dispatch(clearLoading());
+    })
+}
+
 
 
 //==================SYNC ACTIONS================================================>

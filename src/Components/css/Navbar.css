@@ -12,6 +12,9 @@
 .navbar {
   height:4em;
   background-color:#9be2df;
+  position:fixed;
+  top:0;
+  width:100%;
 }
 
 .nav-ul {
@@ -42,6 +45,10 @@
     font-weight:.999;
   }
 
+
+  .spacer {
+    margin-bottom:7em;
+  }
 
 @media only screen and (max-width: 600px) {
   .nav-li {

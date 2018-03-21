@@ -65,13 +65,13 @@
 
 
 .comment-delete-link {
-  position:absolute;
-  right:5.5%;
   background-color:maroon;
   padding:4px;
   border-radius:3px;
   margin-top:-3px;
   cursor:pointer;
+  float:right;
+  display:block;
 }
 
 

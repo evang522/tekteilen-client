@@ -19,6 +19,7 @@ export class Navbar extends React.Component {
   render() {
 
   return (
+    <div>
       <nav className='navbar'>
         <ul className='nav-ul'>
           <li className='nav-li'>
@@ -56,6 +57,8 @@ export class Navbar extends React.Component {
 
         </ul>
       </nav>
+      <div className='spacer'></div>
+    </div>
     )
   }
 }

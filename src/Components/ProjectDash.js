@@ -44,23 +44,23 @@ export class ProjectDash extends React.Component {
             <br/>
             <br/>
             <div className='project-dash-info-container'>
-              <p className='project-description'>
+              <div className='project-description'>
                 <div className='project-description-label'>Description:
                 </div>
                 <br/>
                 <div className='project-description-text'>
                  {this.props.project.description}
                  </div>
-              </p>
+              </div>
               <br/>
               <br/>
-              <p className='proejct-technologies-list'>
+              <div className='proejct-technologies-list'>
               <div className='project-description-label'>
               Technologies: 
               </div>
                 <br/>
                 {this.props.project.technologies}
-              </p>
+              </div>
               {this.props.appError.userError ? <div className='user-error-dialogue'>{this.props.appError.userError.response.data.message}</div> : ''}
               <div className='project-dash-button-container'>
               {this.props.userInfo.isadmin ? <button className='delete-project-button' to='/projects' onClick={() => this.showDeleteProject()}>Remove</button> : ''}
