@@ -6,7 +6,7 @@ import {required} from '../state/validators';
 import Input from '../Components/Input';
 import {login, clearError} from '../state/actions';
 import {Redirect, Link} from 'react-router-dom';
-
+import {toastr} from 'react-redux-toastr';
 
 export class Login extends React.Component {
 
@@ -15,23 +15,24 @@ export class Login extends React.Component {
   }
 
   onSubmit = values => {
-    this.props.dispatch(login(values));
+    const toastrError = () => toastr.error('Incorrect Password', 'Please try re-entering.')
+    const toastrSuccess = () => toastr.success('Welcome to TekTeilen!');
+    this.props.dispatch(login(values, toastrError, toastrSuccess));
   }
 
   render() {
-
+  
     return (
       
       <div className='login-page-container'>
         {this.props.loggedIn ? (<Redirect to='/dashboard' />) : ''}
-
         <header className='login-page-header'>
           <h1> Login to Tekteilen</h1>
         </header>
         {this.props.serverError ? <div className='app-error-message'>{this.props.serverError.message}</div> : 
         <form onSubmit={this.props.handleSubmit(this.onSubmit)}className='login-form' >
             <Field label='Email Address' validate={required} name='email' component={Input} type='text' />
-            <Field label='Password' validate={required} name='password' component={Input} type='password' />
+            <Field label='Password' linebreak={true} validate={required} name='password' component={Input} type='password' />
           <button className='login-submit-button' type='submit'>Submit</button>
         </form> }
         <div className='register-link-container'>

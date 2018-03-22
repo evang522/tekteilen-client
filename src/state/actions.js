@@ -31,15 +31,16 @@ export const clearLocalStorage = () => {
   localStorage.removeItem('Authtoken');
 }
 
-export const logoutAsync = () => dispatch =>{
+export const logoutAsync = (toastrSuccess) => dispatch =>{
     dispatch(setLoading());
     localStorage.removeItem('Authtoken');
     dispatch(hideLogoutDialogue());
     dispatch(logout());
+    toastrSuccess();
     dispatch(clearLoading());
 }
 
-export const login = credentials => (dispatch,getState) => {
+export const login = (credentials,errorToast, successToast) => (dispatch,getState) => {
   dispatch(setLoading());
   const userCreds = {
     email:credentials.email,
@@ -56,14 +57,19 @@ export const login = credentials => (dispatch,getState) => {
   })
     .then(res => res.json())
     .then(data => {
+      if (data.status===400) {
+        dispatch(clearLoading());
+        return errorToast()
+
+      }
+      successToast();
       dispatch(clearLoading());
       setLocalStorage(data.token);
       dispatch(setToken(data.token))
       
     })
     .catch(err => {
-      err.message = 'Unable to contact server. We are working to resolve this ASAP. Thanks for your patience!'
-      dispatch(setError(err, 'SERVER'));
+      console.log(err);
     })
 }
 

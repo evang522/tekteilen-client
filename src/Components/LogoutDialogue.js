@@ -2,11 +2,15 @@ import React from 'react';
 import './css/LogoutDialogue.css';
 import {logoutAsync, hideLogoutDialogue} from '../state/actions';
 import {connect} from 'react-redux';
+import {toastr} from 'react-redux-toastr';
 export class LogoutDialogue extends React.Component {
 
+  
 
   linkOnClick() {
-    this.props.dispatch(logoutAsync())
+    const toastrSuccess = () => toastr.info('You\'ve been logged out');
+    this.props.dispatch(logoutAsync(toastrSuccess))
+    
   }
 
   hideDialogue () {

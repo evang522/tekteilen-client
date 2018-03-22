@@ -15,6 +15,7 @@ import ProjectSubmit from './Components/ProjectSubmit';
 import LogoutDialogue from './Components/LogoutDialogue';
 import RegisterForm from './Components/RegisterForm';
 import {clearError} from './state/actions';
+import ReduxToastr from 'react-redux-toastr';
 
 export class App extends Component {
 
@@ -27,6 +28,14 @@ export class App extends Component {
   render() {
     return (
       <div>
+        <ReduxToastr
+        timeout={4000}
+        newestOnTop={false}
+        preventDuplicates
+        position="top-right"
+        transitionIn="fadeIn"
+        transitionOut="fadeOut"
+        progressBar />
   {this.props.serverError ? 
         <div>
         <Navbar /> 

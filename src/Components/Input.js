@@ -28,6 +28,7 @@ export default class Input extends React.Component {
           {error}
           {warning}
         </label>
+          {this.props.linebreak ? <br/> : ''}
       <Element
       {...this.props.input}
       id={this.props.input.name}
