@@ -26,8 +26,10 @@ export class ConfirmDelete extends React.Component {
             <h2> <b> Remove Project</b> </h2>
             <br/>
             <p> Are you sure you want to remove this project from TekTeilen? </p> 
-            <button onClick={(e) => this.onClick(e)} className='confirm-button'><b>Remove</b></button>
-            <button onClick={() => this.hideDialogue()}className='confirm-button'><b>Back</b></button>
+            <div className='button-container'>
+              <button onClick={(e) => this.onClick(e)} className='confirm-button'><b>Remove</b></button>
+              <button onClick={() => this.hideDialogue()}className='confirm-button'><b>Back</b></button>
+            </div>
           </section>
         </div>
       </div>

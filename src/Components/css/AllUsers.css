@@ -65,3 +65,48 @@
   text-decoration:none;
   color:black;
 }
+
+
+@media only screen and (max-width:600px) {
+
+  .user-card {
+    background-color:white;
+    width:90%;
+    height:9em;
+  }
+
+  .merit {
+    margin-bottom:.5em;
+  }
+
+  .user-card-name {
+    font-size:.9em;
+  }
+  
+  
+  .user-technology-breadcrumb {
+    margin:2px;
+
+  } 
+
+  .user-card-skills {
+    font-size:.7em;
+    overflow-x:scroll;
+  }
+  
+  .user-card-skills li {
+    padding:5px;
+    
+  }
+  
+  
+  .projects-breadcrumbs {
+    margin:1px;
+    font-size:.7em;
+  }
+  
+  .projects-breadcrumbs a {
+    text-decoration:none;
+    color:black;
+  }
+}

@@ -58,3 +58,14 @@
 .register-link-container a {
   color:white;
 }
+
+@media only screen and (max-width:600px) {
+  .login-form input {
+    padding:10px;
+    width:90%;
+  }
+
+  .login-form {
+    width:90%;
+  }
+}

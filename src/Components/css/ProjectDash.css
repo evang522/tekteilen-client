@@ -137,8 +137,7 @@
 
 .technology-list-container {
   display:flex;
-
-}
+  }
 
 .tech-name {
   margin-right:.4em;
@@ -173,5 +172,19 @@
 
   .divider {
     width:80%;
+  }
+
+  .technology-list-container {
+    overflow-x:scroll;
+    width:90%;  
+  }
+
+  .project-technologies-list {
+    width:100%;
+    margin:0 auto;
+  }
+
+  .project-dash-info-container {
+    width:90%;
   }
 }

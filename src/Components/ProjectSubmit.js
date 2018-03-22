@@ -27,6 +27,7 @@ export class ProjectSubmit extends React.Component {
 
     return (
       <div className='project-submit-form-container'>
+      {this.props.loggedIn ? '' : <Redirect to='/login' />}
       {this.props.redirectToProjects ? <Redirect to='/projects' /> : '' }
         <section className='title'>
           <h1 className='project-submit-header'>Submit a Project Request</h1>
@@ -49,6 +50,7 @@ export class ProjectSubmit extends React.Component {
 
 
 const mapStateToProps = state => ({
+  loggedIn: state.reducers.authToken ? true : false,
   projects:state.reducers.projects,
   redirectToProjects:state.reducers.redirectToProjects
   

@@ -148,12 +148,15 @@
 
   .comment-input {
     font-size:.8em;
-
+    width:100% !important;
+    margin-top:1em;
+    margin-bottom:1em;
   }
 
   .add-comment-form {
     display:flex;
     flex-direction:column;
+    width:90%;
   }
 
   .add-comment-form button {

@@ -17,15 +17,23 @@ transform: translate(-50%, -90%);
 
 .dialogue-container button{
   width:7em;
-  padding:5px;
+  padding:8px;
   border:none;
-  border-radius:4px;
   font-size:1.1em;
   margin-top:1em;
-  margin-left:1em;
-  margin-right:1em;
+  margin-left:.5em;
+  margin-right:.5em;
 }
 
+.log-out-confirm-button:hover {
+  background-color:gray;
+  color:white;
+}
+
+.confirm-button:hover {
+  background-color:gray;
+  color:white;
+}
 
 .page-mask {
     position: fixed;
@@ -34,4 +42,16 @@ transform: translate(-50%, -90%);
     bottom: 0;
     top: 0;
     background-color: rgba(0,0,0,0.6);
+}
+
+
+@media only screen and (max-width:600px) {
+  .dialogue-container {
+    font-size:1em;
+    width: calc(90%);
+  }
+
+  .button-container {
+    display:flex;
+  }
 }

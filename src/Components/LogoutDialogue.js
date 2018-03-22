@@ -28,8 +28,10 @@ export class LogoutDialogue extends React.Component {
             <h2> <b> Log out</b> </h2>
             <br/>
             <p> Are you sure you want to log out? </p> 
-            <button onClick={() => this.linkOnClick()}className='log-out-confirm-button'><b>Log Out</b></button>
-            <button onClick={() => this.hideDialogue()}className='log-out-confirm-button'><b>Back</b></button>
+            <div className='button-container'>
+              <button onClick={() => this.linkOnClick()}className='log-out-confirm-button'><b>Log Out</b></button>
+              <button onClick={() => this.hideDialogue()}className='log-out-confirm-button'><b>Back</b></button>
+            </div>
           </section>
         </div>
       </div>
