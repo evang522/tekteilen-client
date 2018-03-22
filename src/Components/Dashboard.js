@@ -25,8 +25,6 @@ export class Dashboard extends React.Component {
           <h2 className='white-text'>Welcome, {this.props.userInfo ? this.props.userInfo.fullname.split(' ')[0] : ''}!</h2>
           <h3> Projects You're Part of: </h3>
           <div className='project-dashboard-container'>
-        {
-          this.props.appError ? <div className='app-error-message'>{this.props.appError.serverError}</div> : 
         <div>
 
           <div className='projects-container'>
@@ -41,7 +39,6 @@ export class Dashboard extends React.Component {
             </div>
           <div className='project-list-container'></div>
         </div>
-        }
 
       </div>
         </section>

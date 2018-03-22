@@ -1,5 +1,5 @@
 import React from 'react';
-import {getAllProjects, setError, clearError, clearRedirects} from '../state/actions';
+import {getAllProjects, clearError, clearRedirects} from '../state/actions';
 import {connect} from 'react-redux';
 import {withRouter, Redirect, Link} from 'react-router-dom';
 import './css/Projects.css';

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {API_URL} from '../config';
+import {toastr} from 'react-redux-toastr';
 
 
 
@@ -18,7 +19,7 @@ export const fetchUsers = () => (dispatch, getState) => {
     })
     .catch(err => {
       err.message = 'Unable to contact server. We are working to resolve this ASAP. Thanks for your patience!'
-      dispatch(setError(err, 'SERVER'));
+      toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
     })
   }
 }
@@ -69,7 +70,8 @@ export const login = (credentials,errorToast, successToast) => (dispatch,getStat
       
     })
     .catch(err => {
-      console.log(err);
+      toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
+      dispatch(clearLoading());
     })
 }
 
@@ -100,7 +102,8 @@ export const register = credentials => dispatch => {
         dispatch(clearLoading());
       })
       .catch(err => {
-        dispatch(setError(err,'SERVER'))
+        toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
+
       })
 };
 
@@ -127,9 +130,8 @@ export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => {
       dispatch(populateProjects(projects.data))
     })
     .catch(err => {
-      console.log(err);
-      err.message = err.message || 'Unable to contact server. We are working to resolve this ASAP. Thanks for your patience!'
-      dispatch(setError(err, 'SERVER'));
+      toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
+      dispatch(clearLoading());
     })
   }
 }
@@ -153,7 +155,8 @@ export const addProjectAsync = project => (dispatch,getState) => {
         dispatch(addProject(response.data))
       })
       .catch(err => {
-        dispatch(setError(err, 'SERVER'))
+        toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
+
       });
 }
 
@@ -181,7 +184,8 @@ export const joinProjectAsync = (userId,projectId, successToast, errorToast) => 
   })
   .catch(err => {
     dispatch(clearLoading());
-    errorToast();
+    toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
+
   });
 }
 
@@ -209,7 +213,8 @@ export const leaveProjectAsync = (userId,projectId, successToast, errorToast) =>
   })
   .catch(err => {
     dispatch(clearLoading());
-    errorToast();
+    toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
+
   });
 }
 
@@ -230,6 +235,10 @@ export const deleteProjectAsync = (projectId) => (dispatch, getState) => {
   .then(response => {
     dispatch(clearLoading());
     dispatch(deleteProject(projectId));
+  })
+  .catch(err => {
+    toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
+
   })
 
 }
@@ -252,15 +261,14 @@ export const getCommentsAsync = () => (dispatch,getState) => {
         dispatch(clearLoading());
       })
       .catch(err => {
-        console.log(err);
-        err.message = err.message || 'Unable to contact server. We are working to resolve this ASAP. Thanks for your patience!'
-        dispatch(setError(err, 'SERVER'));
+        toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
+        dispatch(clearLoading());
       })
+      
 }
   
 
 export const addCommentAsync = (userId,projectId, commentBody) => (dispatch, getState) => {
-  console.log(userId, projectId, commentBody);
 
   dispatch(setLoading());
     const headers =  {
@@ -284,6 +292,10 @@ export const addCommentAsync = (userId,projectId, commentBody) => (dispatch, get
     dispatch(getCommentsAsync());
     dispatch(clearLoading());
   })
+  .catch(err => {
+    toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
+    dispatch(clearLoading());
+  })
 
 }
 
@@ -303,7 +315,7 @@ export const deleteComment = (commentId) => (dispatch, getState) => {
       dispatch(clearLoading());
     })
     .catch(err => {
-      dispatch(setError(err, 'USER'))
+      toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
       dispatch(clearLoading());
     })
 }

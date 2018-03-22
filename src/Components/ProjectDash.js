@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './css/ProjectDash.css';
 import {getAllProjects, deleteProjectAsync, confirmDelete, leaveProjectAsync, joinProjectAsync, fetchUsers} from '../state/actions';
-import {withRouter, Redirect} from 'react-router-dom';
+import {withRouter, Redirect, Link} from 'react-router-dom';
 import {MembersList} from '../Components/MembersList';
 import CommentBoard from './CommentBoard';
 import ConfirmDelete from './ConfirmDelete';
@@ -11,6 +11,7 @@ import {toastr} from 'react-redux-toastr';
 export class ProjectDash extends React.Component {
 
   componentDidMount() {
+    console.log('loggedIn?', this.props.loggedIn);
     this.props.dispatch(getAllProjects());
     this.props.dispatch(fetchUsers());
   }
@@ -42,12 +43,11 @@ export class ProjectDash extends React.Component {
   }
 
   render() {
-    console.log('redirect?: ',this.props.redirectToProject);
       let output = null;
       if (this.props.project) {
         output = (
           <section className='project-dashboard'>
-            {this.props.loggedIn ? '' : <Redirect to='/login' />}
+            {this.props.loggedIn ? '' : <Redirect to='/projects' />}
             {this.props.redirectToProject ? <Redirect to='/projects' /> : ''} 
             <h1 className='project-dash-header'>{this.props.project.title}</h1>
             <div className='divider'></div>
@@ -64,17 +64,22 @@ export class ProjectDash extends React.Component {
               </div>
               <br/>
               <br/>
-              <div className='proejct-technologies-list'>
+              <div className='project-technologies-list'>
               <div className='project-description-label'>
               Technologies: 
               </div>
                 <br/>
-                {this.props.project.technologies}
+                <div className='technology-list-container'>
+                {this.props.project.technologies.map((technology,index) => {
+                  return <div key={index}className='tech-name'>{technology}</div>
+                })}
+                </div>
               </div>
               <div className='project-dash-button-container'>
-              {this.props.userInfo.isadmin ? <button className='delete-project-button' to='/projects' onClick={() => this.showDeleteProject()}>Remove</button> : ''}
-              <button className='join-project-button' onClick={() => this.joinProject()}>Join Project </button>
-              <button className='leave-project-button' onClick={() => this.leaveProject()}>Leave Project </button>
+                <Link to='/projects' className='join-project-button' >Back</Link>
+                {this.props.userInfo.isadmin ? <button className='delete-project-button' to='/projects' onClick={() => this.showDeleteProject()}>Remove</button> : ''}
+                <button className='join-project-button' onClick={() => this.joinProject()}>Join Project </button>
+                <button className='leave-project-button' onClick={() => this.leaveProject()}>Leave Project </button>
               </div>
             </div>
             <MembersList project={this.props.project} users={this.props.users}/>
@@ -96,7 +101,7 @@ export class ProjectDash extends React.Component {
       .projects
       .find(project => project.id === Number(props.match.params.id)),
       userInfo: state.reducers.userInfo,
-      loggedIn: state.reducers.authToken ? true : false,
+      loggedIn: state.reducers.authToken===null ? false: true,
       users:state.reducers.users,
       appError: state.reducers.appError,
       showConfirmDelete:state.reducers.showConfirmDelete,

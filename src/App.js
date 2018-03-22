@@ -36,10 +36,7 @@ export class App extends Component {
         transitionIn="fadeIn"
         transitionOut="bounceOut"
         progressBar />
-  {this.props.serverError ? 
-        <div>
         <Navbar /> 
-        <div className='app-error-message'>{this.props.serverError.message}</div></div> : 
       <div className="App">
         <Navbar />
         {this.props.showLogoutDialogue ? <LogoutDialogue/> : ''}
@@ -54,7 +51,7 @@ export class App extends Component {
         </Switch>
         {this.props.loading ? <Loader /> : ''} 
         <Route path='/users' component={AllUsers} />        
-    </div> }
+    </div>
     </div>
     );
   }

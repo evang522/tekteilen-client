@@ -48,6 +48,7 @@
 }
 
 .join-project-button {
+  text-align:center;
   color:#9BE2DF;
   border:1px solid #9BE2DF;
   background-color:#043049 !important;
@@ -113,7 +114,7 @@
 
 .project-dash-button-container {
   display:flex;
-  width:25em;
+  width:35em;
   justify-content: left;
 
 }
@@ -132,4 +133,19 @@
   margin:0 auto;
   text-align:left;
   color:#9BE2DF !important;
+}
+
+.technology-list-container {
+  display:flex;
+
+}
+
+.tech-name {
+  margin-right:.4em;
+  padding:4px;
+  padding-left:7px;
+  padding-right:7px;
+  background-color: rgb(221, 107, 90);
+  border-radius:5px;
+  color:white;
 }
