@@ -185,7 +185,6 @@ export const joinProjectAsync = (userId,projectId, successToast, errorToast) => 
   .catch(err => {
     dispatch(clearLoading());
     toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
-
   });
 }
 

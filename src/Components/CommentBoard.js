@@ -26,6 +26,14 @@ export class CommentBoard extends React.Component {
   }
 
 
+  handleKeyDown = function (e, cb) {
+    if (e.key === 'Enter' && e.shiftKey === false) {
+      e.preventDefault();
+      cb();
+    }
+  };
+
+
   render () {
 
 
@@ -64,7 +72,7 @@ export class CommentBoard extends React.Component {
           {comments}
         </div>
           <div className='add-comment-container'>
-          <form onSubmit={this.props.handleSubmit(this.addComment)}className='add-comment-form'>
+          <form onKeyDown={e => this.handleKeyDown(e,this.props.handleSubmit(this.addComment))} onSubmit={this.props.handleSubmit(this.addComment)}className='add-comment-form'>
             <Field className='comment-input' name='commentBody' component='textarea'/>
             <button type='submit' className='add-comment-button'>
             Add Comment
