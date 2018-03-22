@@ -15,6 +15,7 @@
   position:fixed;
   top:0;
   width:100%;
+  z-index:1;
 }
 
 .nav-ul {
@@ -54,5 +55,10 @@
   .nav-li {
     font-size:1em;
   }
+
+  .navbar {
+    height:3em;
+  }
+
 }
 

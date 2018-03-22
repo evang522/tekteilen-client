@@ -13,3 +13,16 @@
 .homepage-image {
   margin-top:1.8em;
 }
+
+
+
+
+@media only screen and (max-width: 600px) {
+ .homepage-image {
+   width:6em;
+ }
+
+ .homepage-container h1 {
+   font-size:1.1em;
+ }
+}

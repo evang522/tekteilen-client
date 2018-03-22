@@ -76,10 +76,10 @@ export class ProjectDash extends React.Component {
                 </div>
               </div>
               <div className='project-dash-button-container'>
-                <Link to='/projects' className='join-project-button' >Back</Link>
-                {this.props.userInfo.isadmin ? <button className='delete-project-button' to='/projects' onClick={() => this.showDeleteProject()}>Remove</button> : ''}
-                <button className='join-project-button' onClick={() => this.joinProject()}>Join Project </button>
-                <button className='leave-project-button' onClick={() => this.leaveProject()}>Leave Project </button>
+                <Link to='/projects' className='join-project-button project-dash-button' >Back</Link>
+                {this.props.userInfo.isadmin ? <button className='project-dash-button delete-project-button' to='/projects' onClick={() => this.showDeleteProject()}>Remove</button> : ''}
+                <button className='project-dash-button join-project-button' onClick={() => this.joinProject()}>Join Project </button>
+                <button className='project-dash-button leave-project-button' onClick={() => this.leaveProject()}>Leave Project </button>
               </div>
             </div>
             <MembersList project={this.props.project} users={this.props.users}/>

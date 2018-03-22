@@ -149,3 +149,29 @@
   border-radius:5px;
   color:white;
 }
+
+
+@media only screen and (max-width:600px) {
+  .project-dash-button-container {
+    flex-direction:column;
+    margin:0 auto;
+    margin-top:1em;
+    width:80%;
+  }
+
+  .project-dash-button{
+    margin:3px auto;
+  }
+
+  .members-list-container {
+    display:none;
+  }
+
+  .project-description-text {
+    max-width:95%;
+  }
+
+  .divider {
+    width:80%;
+  }
+}

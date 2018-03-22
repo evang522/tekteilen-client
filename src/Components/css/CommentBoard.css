@@ -7,6 +7,7 @@
   border-radius:5px;
   overflow-x:hidden;
   padding:1em;
+  
 }
 
 .comment-board-label {
@@ -38,9 +39,6 @@
 }
 
 
-.moment-format {
-  margin-left:1em;
-}
 
 .add-comment-container textarea{
   width:80%;
@@ -106,13 +104,9 @@
 
 
 .moment-format {
-  padding:1px;
   font-size:.7em;
-  padding-left:10px;
-  padding-right:10px;
-  border-radius:10px;
-  background-color:white;
-  color:#E67A59;
+  color:black;
+  margin-left:1em;
 }
 
 .comment-author {
@@ -126,4 +120,54 @@
   align-self:center;
   margin-right:2px;
   
+}
+
+
+@media only screen and (max-width:600px) {
+  .comment-board {
+    width:90%;
+  }
+  .comment-author{
+    font-size:.7em;
+  }
+
+  .comment-delete-link {
+    font-size:.7em;
+    right:11%;
+    margin-top:1px;
+  }
+
+  .comment-body {
+    font-size:.7em;
+    max-width:15em;
+  }
+
+  .moment-format {
+    padding:3px;
+  }
+
+  .comment-input {
+    font-size:.8em;
+
+  }
+
+  .add-comment-form {
+    display:flex;
+    flex-direction:column;
+  }
+
+  .add-comment-form button {
+    margin-bottom:1em;
+  }
+  
+  .comment-board {
+    width:95%;
+    padding:.5em;
+  }
+
+  .comment {
+    margin:1px;
+
+  }
+
 }
