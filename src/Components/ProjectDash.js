@@ -6,6 +6,7 @@ import {withRouter, Redirect} from 'react-router-dom';
 import {MembersList} from '../Components/MembersList';
 import CommentBoard from './CommentBoard';
 import ConfirmDelete from './ConfirmDelete';
+import {toastr} from 'react-redux-toastr';
 
 export class ProjectDash extends React.Component {
 
@@ -19,11 +20,20 @@ export class ProjectDash extends React.Component {
   }
 
   joinProject () {
-    this.props.dispatch(joinProjectAsync(this.props.userInfo.id, this.props.project.id));
+    const toastrSuccess = () => toastr.info(`You have Joined ${this.props.project.title}`);
+    const toastrError = () => toastr.warning(`You're already part of this project!`);
+
+    this.props.dispatch(joinProjectAsync(this.props.userInfo.id, this.props.project.id, toastrSuccess, toastrError));
   }
   
   leaveProject () {
-    this.props.dispatch(leaveProjectAsync(this.props.userInfo.id, this.props.project.id));
+    const toastrSuccess = () => toastr.info(`You have left ${this.props.project.title}`);
+    const toastrError = () => toastr.warning(`You can't leave a project you're not part of!`);
+
+    if (!this.props.project.volunteers.includes(this.props.userInfo.id)) {
+      return toastrError();
+    }
+    this.props.dispatch(leaveProjectAsync(this.props.userInfo.id, this.props.project.id, toastrSuccess, toastrError));
     this.props.dispatch(getAllProjects());    
   }
 
@@ -61,7 +71,6 @@ export class ProjectDash extends React.Component {
                 <br/>
                 {this.props.project.technologies}
               </div>
-              {this.props.appError.userError ? <div className='user-error-dialogue'>{this.props.appError.userError.response.data.message}</div> : ''}
               <div className='project-dash-button-container'>
               {this.props.userInfo.isadmin ? <button className='delete-project-button' to='/projects' onClick={() => this.showDeleteProject()}>Remove</button> : ''}
               <button className='join-project-button' onClick={() => this.joinProject()}>Join Project </button>

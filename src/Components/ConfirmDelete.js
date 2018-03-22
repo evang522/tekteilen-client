@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { hideConfirmDelete, deleteProjectAsync, setProjectRedirect } from '../state/actions';
+import {toastr} from 'react-redux-toastr';
 
 export class ConfirmDelete extends React.Component {
 
@@ -13,11 +14,10 @@ export class ConfirmDelete extends React.Component {
     this.props.dispatch(deleteProjectAsync(this.props.currentProject));
     this.props.dispatch(setProjectRedirect());
     this.props.dispatch(hideConfirmDelete());
+    toastr.info('Project Removed');
   }
   
   render() {
-    console.log('this.props', this.props);
-
     return (
       <div className='confirm-delete-container'>
       <div className='page-mask'></div>

@@ -4,6 +4,7 @@ import {clearError, addCommentAsync, deleteComment, getCommentsAsync} from '../s
 import {reduxForm, Field} from 'redux-form';
 import './css/CommentBoard.css';
 import Moment from 'react-moment';
+import {toastr} from 'react-redux-toastr';
 
 export class CommentBoard extends React.Component {
 
@@ -22,9 +23,7 @@ export class CommentBoard extends React.Component {
   }
   
   deleteComment = (id)  => {
-    let commentId = id;
     this.props.dispatch(deleteComment(id))
-    console.log(commentId);
   }
 
 

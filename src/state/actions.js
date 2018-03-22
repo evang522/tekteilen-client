@@ -157,7 +157,7 @@ export const addProjectAsync = project => (dispatch,getState) => {
       });
 }
 
-export const joinProjectAsync = (userId,projectId) => (dispatch, getState) => {
+export const joinProjectAsync = (userId,projectId, successToast, errorToast) => (dispatch, getState) => {
   dispatch(setLoading());
   
   const headers=  {
@@ -175,16 +175,17 @@ export const joinProjectAsync = (userId,projectId) => (dispatch, getState) => {
     headers
   })
   .then(response => {
+    successToast();
     dispatch(getAllProjects(true));
     dispatch(clearLoading());
   })
   .catch(err => {
-    err.message = 'You are already joined to this project!';
-    dispatch(setError(err, 'USER'));
+    dispatch(clearLoading());
+    errorToast();
   });
 }
 
-export const leaveProjectAsync = (userId,projectId) => (dispatch, getState) => {
+export const leaveProjectAsync = (userId,projectId, successToast, errorToast) => (dispatch, getState) => {
   dispatch(setLoading());
   
   const headers=  {
@@ -202,12 +203,13 @@ export const leaveProjectAsync = (userId,projectId) => (dispatch, getState) => {
     headers
   })
   .then(response => {
+    successToast();
     dispatch(getAllProjects(true));
     dispatch(clearLoading());
   })
   .catch(err => {
-    console.log(err);
-    dispatch(setError(err, 'USER'));
+    dispatch(clearLoading());
+    errorToast();
   });
 }
 

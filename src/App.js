@@ -30,11 +30,11 @@ export class App extends Component {
       <div>
         <ReduxToastr
         timeout={4000}
-        newestOnTop={false}
+        newestOnTop={true}
         preventDuplicates
         position="top-right"
         transitionIn="fadeIn"
-        transitionOut="fadeOut"
+        transitionOut="bounceOut"
         progressBar />
   {this.props.serverError ? 
         <div>
