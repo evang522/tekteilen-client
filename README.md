@@ -29,3 +29,23 @@ PostgreSQL interfaced with knex.js
   Redux
   Moment.js
   Toastr
+
+
+
+## Landing Page
+![alt text](https://github.com/evang522/tekteilen-client/blob/master/public/homescreen.png "Homescreen")
+
+## User Dashboard
+![alt text](https://github.com/evang522/tekteilen-client/blob/master/public/tekteilen-dashboard.png "User Dashboard")
+
+## View an Individual Project
+![alt text](https://github.com/evang522/tekteilen-client/blob/master/public/project-dashboard.png "Individual Project")
+
+## Viewing Available Projects
+![alt text](https://github.com/evang522/tekteilen-client/blob/master/public/allprojects.png "View All Projects")
+
+## Submit A Project
+![alt text](https://github.com/evang522/tekteilen-client/blob/master/public/newproject.png "Submit A Project")
+
+## Mobile View
+![alt text](https://github.com/evang522/tekteilen-client/blob/master/public/Screenshot_24.png "Mobile View")
