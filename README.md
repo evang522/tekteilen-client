@@ -45,7 +45,7 @@ https://tekteilen-app.netlify.com
 * PUT
 * DELETE
 
-## COMMENTS ('/comments')
+## Comments ('/comments')
 * GET
 * POST
 * PUT
