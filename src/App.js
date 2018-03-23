@@ -29,28 +29,29 @@ export class App extends React.Component {
     return (
       <div>
         <ReduxToastr
-        timeout={4000}
+        timeOut='2000'
         newestOnTop={true}
         preventDuplicates
         position="top-right"
-        transitionIn="fadeIn"
-        transitionOut="bounceOut"
-        progressBar />
+        transitionIn="bounceIn"
+        transitionOut="bounceOut"/>
         <Navbar /> 
       <div className="App">
-        <Navbar />
-        {this.props.showLogoutDialogue ? <LogoutDialogue/> : ''}
-        <Route exact path='/register' component={RegisterForm} />
-        <Route exact path='/' component={Homepage} />
-        <Route exact path='/dashboard' component={Dashboard} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/add/project' component={ProjectSubmit} />  
-        <Switch>
-          <Route exact path='/projects/:id' component={ProjectDash} />    
-          <Route exact path='/projects' component={Projects} />  
-        </Switch>
-        {this.props.loading ? <Loader /> : ''} 
-        <Route path='/users' component={AllUsers} />        
+        <main role='main'>
+          <Navbar />
+          {this.props.showLogoutDialogue ? <LogoutDialogue/> : ''}
+          <Route exact path='/register' component={RegisterForm} />
+          <Route exact path='/' component={Homepage} />
+          <Route exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/add/project' component={ProjectSubmit} />  
+          <Switch>
+            <Route exact path='/projects/:id' component={ProjectDash} />    
+            <Route exact path='/projects' component={Projects} />  
+          </Switch>
+          {this.props.loading ? <Loader /> : ''} 
+          <Route path='/users' component={AllUsers} />        
+        </main>
     </div>
     </div>
     );

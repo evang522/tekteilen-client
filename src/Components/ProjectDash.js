@@ -84,9 +84,9 @@ export class ProjectDash extends React.Component {
                 <button className='project-dash-button leave-project-button' onClick={() => this.leaveProject()}>Leave Project </button>
               </div>
             </div>
-            <MembersList project={this.props.project} users={this.props.users}/>
             <CommentBoard project={this.props.project} />
             {this.props.showConfirmDelete ? <ConfirmDelete currentProject = {this.props.project.id}/> : '' }
+            <MembersList project={this.props.project} users={this.props.users}/>
           </section>
         )
       }

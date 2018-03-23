@@ -1,5 +1,5 @@
 .members-list-container {
-  background-color:#DDDDDD;
+  background-color:#7DE0CC;
   width:18em;
   min-height:4.3em;
   max-height:40em;
@@ -16,7 +16,7 @@
   flex-direction:row;
   padding:10px;
   padding-top:15px;
-  background-color:#EEEEEE;
+  background-color:white;
   border-radius:5px;
   margin:1.5px;
   
@@ -31,7 +31,7 @@
 }
 
 .name-circle {
-  background-color:#E67A59;
+  background-color:rgb(179, 84, 55);
   border-radius:2em;
   margin-right:2em;
   height:2.5em;
@@ -43,4 +43,20 @@
 .full-name {
   line-height:2.3em;
   color:#043049;
+}
+
+
+@media only screen and (max-width:1400px) {
+
+  .members-list-container {
+    margin:0 auto;
+    margin-top:1em;
+    margin-bottom:1em;
+    width:90%;
+    min-height:4.3em;
+    max-height:40em;
+    border-radius:5px;
+    overflow-y: auto;
+    position:static;
+  }
 }

@@ -73,10 +73,12 @@ export class CommentBoard extends React.Component {
         </div>
           <div className='add-comment-container'>
           <form onKeyDown={e => this.handleKeyDown(e,this.props.handleSubmit(this.addComment))} onSubmit={this.props.handleSubmit(this.addComment)}className='add-comment-form'>
-            <Field className='comment-input' name='commentBody' component='textarea'/>
-            <button type='submit' className='add-comment-button'>
-            Add Comment
-          </button>
+            <Field className='comment-input' id='comment-input' name='commentBody' component='textarea'/>
+            <label htmlFor='comment-input'>
+              <button type='submit' className='add-comment-button'>
+                Add Comment
+              </button>
+            </label>
             </form>
           </div>
       </div>

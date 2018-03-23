@@ -125,6 +125,7 @@
   margin-bottom: -.5em;
   font-size:1.6em;
   font-weight:lighter;
+  color:#93D9D7 !important;
   
 }
 
@@ -144,7 +145,7 @@
   padding:4px;
   padding-left:7px;
   padding-right:7px;
-  background-color: rgb(221, 107, 90);
+  background-color: rgb(189, 79, 62);
   border-radius:5px;
   color:white;
 }
@@ -153,18 +154,14 @@
 @media only screen and (max-width:600px) {
   .project-dash-button-container {
     flex-direction:column;
-    margin:0 auto;
     margin-top:1em;
     width:80%;
   }
 
   .project-dash-button{
-    margin:3px auto;
+    margin:3px;
   }
 
-  .members-list-container {
-    display:none;
-  }
 
   .project-description-text {
     max-width:95%;

@@ -1,5 +1,5 @@
 .comment-board {
-  background-color:#EEEEEE;
+  background-color:white;
   min-height:20em;
   width:65%;
   margin:auto;
@@ -21,9 +21,9 @@
 
 .comment {
   display:flex;
-  color:white;
+  color:#043049;
   justify-content:left;
-  background-color:rgb(230, 122, 89);
+  background-color: rgb(125, 224, 204);
   margin:3px auto;
   padding:10px;
   border-radius:4px;
@@ -64,15 +64,15 @@
 
 
 .comment-delete-link {
-  background-color: white;
-  padding:4px;
+  background-color: #043049;
+  padding:5px;
   border-radius:3px;
   margin-top:-3px;
   cursor:pointer;
   position:absolute;
   right:19%;
   display:block;
-  color:rgb(230, 122, 89);
+  color:white;
 }
 
 
@@ -100,18 +100,19 @@
 
 
 .comment-board-header {
-  color:#E67A59 !important;
+  color:rgb(189, 97, 69) !important;
   line-height:1em;
-  font-size:1.1em;
-  margin-bottom:1em;
+  font-size:1.2em;
+  margin-bottom:.5em;
   font-weight:bold;
 }
 
 
 .moment-format {
   font-size:.7em;
-  color:black;
+  color:#043049;
   margin-left:1em;
+  font-weight:bold;
 }
 
 .comment-author {
@@ -119,8 +120,8 @@
   padding-left:10px;
   padding-right:10px;
   border-radius:10px;
-  background-color:#175d7e;
-  color:#9BE2DF;
+  background-color:white;
+  color:black;
   display:flex;
   align-self:center;
   margin-right:2px;
@@ -138,7 +139,7 @@
 
   .comment-delete-link {
     font-size:.7em;
-    right:11%;
+    right:6% !important;
     margin-top:1px;
   }
 
@@ -178,4 +179,20 @@
 
   }
 
+}
+
+
+@media only screen and (max-width:1500px) {
+
+  .comment-delete-link {
+    right:19.5%;
+  }
+}
+
+
+@media only screen and (max-width:1000px) {
+
+  .comment-delete-link {
+    right:20.5%;
+  }
 }
