@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Navbar from './Components/Navbar';
 import Projects from './Components/Projects';
@@ -17,7 +17,7 @@ import RegisterForm from './Components/RegisterForm';
 import {clearError} from './state/actions';
 import ReduxToastr from 'react-redux-toastr';
 
-export class App extends Component {
+export class App extends React.Component {
 
 
   componentDidMount () {

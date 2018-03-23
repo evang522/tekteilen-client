@@ -1,0 +1,43 @@
+.register-input {
+  width:30em;
+}
+
+.register-form-container label {
+  color:white;
+  font-size:1.1em;
+}
+
+.register-input {
+  margin:.5em;
+}
+
+.register-header {
+  color:#FA6E59;
+}
+
+.register-form-container h1 {
+
+  font-size:3em;
+  margin-bottom:1em;
+}
+
+.register-form-container button {
+  padding:10px;
+  width:8em;
+  border:none;
+  background-color:#FA6E59;
+  font-size:1em;
+  font-weight:bold;
+}
+
+
+@media only screen and (max-width:600px) {
+  .register-input {
+    width:90%;
+  }
+
+  .register-form-container button {
+    margin-bottom:1em;
+  }
+
+}

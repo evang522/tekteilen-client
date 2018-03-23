@@ -23,7 +23,7 @@ export class Dashboard extends React.Component {
         </header>
         <section className='subscribed-projects'>
           <h2 className='white-text'>Welcome, {this.props.userInfo ? this.props.userInfo.fullname.split(' ')[0] : ''}!</h2>
-          <h3> Projects You're Part of: </h3>
+          {this.props.projects ? this.props.projects.length > 0 ? (<h3> Projects You're Part of: </h3>) : <div><h3>Looks like you're not part of any Projects!<br/><br/>Check out some Projects to subscribe to <Link className='projects-link' to='/projects'>here!</Link></h3></div> :'' }
           <div className='project-dashboard-container'>
         <div>
 
