@@ -33,7 +33,7 @@
 .comment-body {
   margin-left:5px;
   text-align:left;
-  max-width:65em;
+  max-width:calc(83%);
   padding-top:4px;
   word-wrap:break-word;
 }
@@ -145,7 +145,8 @@
 
   .comment-body {
     font-size:.7em;
-    max-width:15em;
+    max-width:calc(62%) !important;
+    
   }
 
   .moment-format {
@@ -182,17 +183,47 @@
 }
 
 
-@media only screen and (max-width:1500px) {
+@media only screen and (max-width:1600px) {
 
   .comment-delete-link {
     right:19.5%;
   }
+
+  .comment-body {
+    max-width:calc(73%);
+  }
+  
 }
 
 
-@media only screen and (max-width:1000px) {
+
+@media only screen and (max-width:1100px) {
+
+  .comment-body {
+    max-width:calc(60%);
+  }
 
   .comment-delete-link {
     right:20.5%;
   }
+}
+
+@media only screen and (max-width:800px) {
+
+  .comment-body {
+    max-width:calc(54%);
+  }
+
+
+}
+
+
+
+@media only screen and (max-width:670px) {
+
+  .comment-body {
+    max-width:calc(50%);
+  }
+
+
 }

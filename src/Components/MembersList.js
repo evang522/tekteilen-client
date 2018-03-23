@@ -22,7 +22,8 @@ export class MembersList extends React.Component{
               {member.fullname.split(' ')[0].split('')[0]}
               </div>
               <div className='full-name'>
-                {member.fullname}
+                <a href={'mailto:'+member.email}>{member.fullname}</a>
+                
               </div>
             </li>
           )

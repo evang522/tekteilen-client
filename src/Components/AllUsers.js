@@ -15,6 +15,34 @@ export class AllUsers extends React.Component {
 
   render () {
 
+const userProjects = (user) =>  {
+  if (this.props.projects) {
+    const projectsInvolvingUser =
+     this
+      .props
+      .projects
+      .filter(project => {
+        if (project.volunteers) {
+          return Number(project.volunteers.includes(Number(user.id)))
+        }
+        return false;
+      });
+
+      if (projectsInvolvingUser.length === 0) {
+
+        return <div className='projects-breadcrumbs extended-breadcrumb'>Looks like this user isn't involved in any projects yet!</div>
+      }
+      
+      return projectsInvolvingUser.map((project, index) => (
+        <li className='projects-breadcrumbs' key={index}>
+          <Link to={`/projects/${project.id}`}>{project.title}</Link>
+        </li>
+      ))
+    }
+}
+
+console.log(userProjects);
+
     return (
       <div className='users-container'>
       {this.props.loggedIn ? '' : <Redirect to='/login' />}
@@ -32,13 +60,7 @@ export class AllUsers extends React.Component {
               <p className='merit'>Merit: {user.merit}</p>
               <ul className='user-card-skills'>
                 <li><b>Projects:</b></li>
-                {this.props.projects ? this.props.projects.filter(project => { 
-                  if (project.volunteers) {
-                  return Number(project.volunteers.includes(Number(user.id)))
-                  } 
-                  return false;
-                }).map((project,index) => (<li className='projects-breadcrumbs' key={index}><Link to={`/projects/${project.id}`}>{project.title}</Link></li>)) : ''}
-                
+              {userProjects(user)}
               </ul>
               
             </div>

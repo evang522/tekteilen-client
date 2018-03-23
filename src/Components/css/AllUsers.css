@@ -19,7 +19,7 @@
 
 
 .user-technology-breadcrumb {
-  background-color:#E67A59;
+  background-color:rgb(180, 92, 65);
   color:white;
   border-radius:20px;
   margin:5px;
@@ -33,6 +33,10 @@
                                     supported by Chrome and Opera */
 } 
 
+
+.extended-breadcrumb {
+  padding:10px !important;
+}
 .user-card-name {
   color:black;
   font-size:1.4em;
