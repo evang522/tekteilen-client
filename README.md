@@ -21,11 +21,11 @@ https://tekteilen-app.netlify.com
 PostgreSQL interfaced with knex.js
 
 ### Server
-Node.js
-Express.js
+  Node.js
+  Express.js
 
 ### Client Technologies
-React.js
-Redux
-Moment.js
-Toastr
+  React.js
+  Redux
+  Moment.js
+  Toastr
