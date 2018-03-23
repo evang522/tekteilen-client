@@ -10,7 +10,7 @@ const initialState = {
   showLogoutDialogue:false,
   comments: [],
   showConfirmDelete:false,
-  redirectToProjects:false
+  redirectToProjects:false,
 }
 
 export const reducers = (state = initialState, action) => {
