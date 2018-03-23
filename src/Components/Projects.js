@@ -10,12 +10,6 @@ export class Projects extends React.Component{
   componentDidMount () {
     this.props.dispatch(clearRedirects());
     this.props.dispatch(clearError())
-    // TODO GET RID OF THIS MAYBE...
-    // if (!store.getState().reducers.authToken) {
-    //   const err = new Error();
-    //   err.message='Not Authenticated, please log in.';
-    //   return this.props.dispatch(setError(err,'USER'));     
-    // }
     this.props.dispatch(getAllProjects());
   }
 
@@ -31,6 +25,10 @@ export class Projects extends React.Component{
           this.props.serverError ? <div className='app-error-message'>{this.props.serverError}</div> : 
         <div>
             <Link to='/add/project' className='create-new-project-button'>+New Project </Link>
+            <div className='search-container'>
+              <button className='create-new-project-button'>Search projects</button>
+              <input type='text' className='search-input' placeholder = 'Search...'/>
+            </div>
           <div className='projects-container'>
           {this.props.projects && this.props.projects.length ? this.props.projects.map(project => (
           <div data-id={project.id} key={project.id} className='project-card'>

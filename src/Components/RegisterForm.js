@@ -22,6 +22,7 @@ export class RegisterForm extends React.Component {
         <Field component={Input} linebreak className='register-input' type='text' name='email' label='Email Address'/>
         <Field component={Input} linebreak className='register-input' type='password' name='password' label='Password'/>
         <Field component={Input} linebreak className='register-input' type='password' name='password1' label='Verify Password' />
+        <Field component={Input} linebreak className='register-input' type='text' name='technologies' label='Technologies you are Skilled With (Comma Separated)' />
         <button  type='submit'>Submit</button>
       </form>      
     )
