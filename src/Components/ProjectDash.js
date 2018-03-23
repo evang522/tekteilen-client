@@ -31,9 +31,11 @@ export class ProjectDash extends React.Component {
     const toastrSuccess = () => toastr.info(`You have left ${this.props.project.title}`);
     const toastrError = () => toastr.warning(`You can't leave a project you're not part of!`);
 
-    if (!this.props.project.volunteers.includes(this.props.userInfo.id)) {
-      return toastrError();
-    }
+    if (this.props.project.volunteers) {
+     if (!this.props.project.volunteers.includes(this.props.userInfo.id)) {
+        return toastrError();
+     }
+  }
     this.props.dispatch(leaveProjectAsync(this.props.userInfo.id, this.props.project.id, toastrSuccess, toastrError));
     this.props.dispatch(getAllProjects());    
   }

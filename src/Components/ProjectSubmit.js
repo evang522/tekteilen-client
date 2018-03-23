@@ -17,7 +17,7 @@ export class ProjectSubmit extends React.Component {
     }
   }
 
-  onClick = values => {
+  onSubmit = values => {
     console.log(values);
     this.props.dispatch(addProjectAsync(values))
     this.props.dispatch(setProjectRedirect());
@@ -32,7 +32,7 @@ export class ProjectSubmit extends React.Component {
         <section className='title'>
           <h1 className='project-submit-header'>Submit a Project Request</h1>
         </section>
-        <form onClick={this.props.handleSubmit(this.onClick)}className='project-submit-form'>
+        <form onSubmit={this.props.handleSubmit(this.onSubmit)}className='project-submit-form'>
           <Field className='submit-project-input' component={Input} validate={required} type='text' name='title' label='Project Title'/>
           <Field className='submit-project-input' element='textarea' component={Input} validate={required} type='text' name='description' label='Project Description' />
           <Field className='submit-project-input' component={Input} validate={required} type='text' name='technologies' label='Technologies Needed (Comma Separated Values)' />
@@ -40,7 +40,6 @@ export class ProjectSubmit extends React.Component {
           <button className='submit-project-button' type='submit'>Submit</button>
         </form>
       </div>
-
     )
 
 
