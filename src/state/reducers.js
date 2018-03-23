@@ -1,4 +1,4 @@
-import {SET_LOADING, CONFIRM_DELETE, HIDE_CONFIRM_DELETE, POPULATE_COMMENTS, DELETE_PROJECT, CLEAR_LOADING, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE} from './actions';
+import {SET_LOADING, CONFIRM_DELETE, HIDE_CONFIRM_DELETE, POPULATE_COMMENTS, DELETE_PROJECT, CLEAR_LOADING, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE, REGISTER_SUCCESS} from './actions';
 
 const initialState = {
   loading: false,
@@ -70,6 +70,9 @@ export const reducers = (state = initialState, action) => {
     state.projects
       .filter(project => project.id !== action.projectId)
     })
+  }
+  if(action.type===REGISTER_SUCCESS) {
+    return Object.assign({},state, {registerSuccess:true});
   }
   if (action.type === SHOWLOGOUT_DIALOGUE) {
     return Object.assign({},state, {showLogoutDialogue:true})

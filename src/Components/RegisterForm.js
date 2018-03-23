@@ -9,7 +9,6 @@ import './css/RegisterForm.css';
 export class RegisterForm extends React.Component {
 
   onSubmit =  values => {
-    console.log('onSubmit ran');
     this.props.dispatch(register(values));
   }
 

@@ -100,8 +100,15 @@ export const register = credentials => dispatch => {
     })
       .then(response => {
         dispatch(clearLoading());
+        toastr.success('Welcome to TekTeilen!');
       })
       .catch(err => {
+        if (err.response) {
+          if (err.response.status === 400) {
+            dispatch(clearLoading());
+            return toastr.error(err.response.data.message);
+          }
+        }
         toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
 
       })
@@ -350,6 +357,10 @@ export const setError = (err,errorType) => ({
   errorType
 })
 
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const registerSuccess = () => ({
+  type:REGISTER_SUCCESS
+})
 
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const clearError = () => ({
