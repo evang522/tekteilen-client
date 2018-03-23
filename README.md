@@ -18,18 +18,58 @@ https://tekteilen-app.netlify.com
 ## Tech Stack
 
 ### Database
-PostgreSQL interfaced with knex.js
+* PostgreSQL
+* Knex.js
 
 ### Server
-  Node.js
-  Express.js
+*  Node.js
+*  Express.js
+*  Custom Authentication Middleware
 
 ### Client Technologies
-  React.js
-  Redux
-  Moment.js
-  Toastr
+* React.js
+* Redux
+* Moment.js
+* Toastr
 
+
+## Endpoints
+
+### Users ('/users')
+* GET
+* POST
+
+### Projects ('/projects')
+* GET
+* POST
+* PUT
+* DELETE
+
+## COMMENTS ('/comments')
+* GET
+* POST
+* PUT
+* DELETE
+
+
+
+
+
+## Codebase
+This root component for tekteilen is 'App.js', which contains a router and renders different pages conditionally depending on the URL. The app contains a global state using Redux, keeping track of such things as:
+* The array of projects downloaded from the server
+* Whether or not the app should redirect to specific pages
+* The users list downloaded from the server (excluding their passwords and other private information, of course!
+* Whether or not the app is experiencing an Error
+* The comments associated with projects
+* Logged in user information and Auth Token
+* Whether or not to show modal dialogues such as the logout dialogue.
+* The Status of the app Loading Spinner
+
+
+
+## Mobile View
+![alt text](https://github.com/evang522/tekteilen-client/blob/master/public/Screenshot_24.png "Mobile View")
 
 
 ## Landing Page
@@ -47,5 +87,4 @@ PostgreSQL interfaced with knex.js
 ## Submit A Project
 ![alt text](https://github.com/evang522/tekteilen-client/blob/master/public/newproject.png "Submit A Project")
 
-## Mobile View
-![alt text](https://github.com/evang522/tekteilen-client/blob/master/public/Screenshot_24.png "Mobile View")
+
