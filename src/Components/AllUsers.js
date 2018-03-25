@@ -8,9 +8,11 @@ import {fetchUsers, clearError, getAllProjects} from '../state/actions';
 export class AllUsers extends React.Component {
 
   componentDidMount() {
+    if (this.props.loggedIn) {
     this.props.dispatch(clearError());
     this.props.dispatch(fetchUsers());
     this.props.dispatch(getAllProjects())
+    }
   }
 
   render () {

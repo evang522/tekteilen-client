@@ -4,8 +4,24 @@ import {clearError, addCommentAsync, deleteComment, getCommentsAsync} from '../s
 import {reduxForm, Field} from 'redux-form';
 import './css/CommentBoard.css';
 import Moment from 'react-moment';
+import io from 'socket.io-client';
+import {SOCKET_URL} from '../config';
 
 export class CommentBoard extends React.Component {
+
+  constructor (props) {
+    super(props);
+
+    // Socketio Code for populating chat messages live
+    this.socket = io.connect(SOCKET_URL);
+
+    this.socket.on(`chat-project-${this.props.project? this.props.project.id : ''}`, data => {
+      this.props.dispatch(getCommentsAsync());
+      console.log('dispatching comment fetch');
+    })
+
+  }
+
 
   componentDidMount () {
     this.props.dispatch(clearError())
@@ -13,16 +29,28 @@ export class CommentBoard extends React.Component {
   }
 
   addComment = values => {
+
     if (!values.commentBody) {
       return;
     }
     this.props.dispatch(addCommentAsync(this.props.userInfo.id, this.props.project.id, values.commentBody))
-    console.log(values);
     values.commentBody = '';
+
+    
+    this.socket.emit('new-chat-message', {
+      projectId:this.props.project.id
+    })
+
+    this.socket.on(`chat-project-${this.props.project.id}`, data => {
+      this.props.dispatch(getCommentsAsync());
+    })
   }
   
   deleteComment = (id)  => {
     this.props.dispatch(deleteComment(id))
+    this.socket.emit('new-chat-message', {
+      projectId:this.props.project.id
+    })
   }
 
 

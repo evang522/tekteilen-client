@@ -8,9 +8,11 @@ import './css/Projects.css';
 export class Projects extends React.Component{
 
   componentDidMount () {
+    if (this.props.loggedIn) {
     this.props.dispatch(clearRedirects());
     this.props.dispatch(clearError())
     this.props.dispatch(getAllProjects());
+    }
   }
 
   render() {
@@ -26,7 +28,7 @@ export class Projects extends React.Component{
         <div>
             <Link to='/add/project' className='create-new-project-button'>+New Project </Link>
             <div className='search-container'>
-              <button className='create-new-project-button'>Search projects</button>
+              <button className='search-project-button'>Search</button>
               <input type='text' className='search-input' placeholder = 'Search...'/>
             </div>
           <div className='projects-container'>

@@ -1,14 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './css/ProjectDash.css';
-import {getAllProjects, deleteProjectAsync, confirmDelete, leaveProjectAsync, joinProjectAsync, fetchUsers} from '../state/actions';
+import {getAllProjects, deleteProjectAsync,  confirmDelete, leaveProjectAsync, joinProjectAsync, fetchUsers} from '../state/actions';
 import {withRouter, Redirect, Link} from 'react-router-dom';
 import {MembersList} from '../Components/MembersList';
 import CommentBoard from './CommentBoard';
 import ConfirmDelete from './ConfirmDelete';
 import {toastr} from 'react-redux-toastr';
+// import io from 'socket.io-client';
+// import {SOCKET_URL} from '../config';
 
 export class ProjectDash extends React.Component {
+
+  // constructor(props) {
+  //   super(props);
+  //   this.socket = io(SOCKET_URL);
+  // }
 
   componentDidMount() {
     console.log('loggedIn?', this.props.loggedIn);
@@ -25,6 +32,11 @@ export class ProjectDash extends React.Component {
     const toastrError = () => toastr.warning(`You're already part of this project!`);
 
     this.props.dispatch(joinProjectAsync(this.props.userInfo.id, this.props.project.id, toastrSuccess, toastrError));
+
+    // console.log('projectid', this.props.project.id);
+    // this.socket.emit('volunteer change', {
+    //   projectId: this.props.project.id
+    // })
   }
   
   leaveProject () {

@@ -97,6 +97,23 @@ a.project-card-button {
   color:black;
 }
 
+.search-project-button {
+  background-color:#EEEEEE;
+  display:inline-block;
+  width:15em;
+  line-height:1.5em;
+  height:2.3em;
+  border:none;
+  border-radius:3px;
+  font-size:1.1em;
+  margin:0 auto;
+  text-decoration:none;
+  margin-top:1em;
+  padding:7px;
+  color:black;
+}
+
+
 
 .search-container {
   display:flex;
@@ -107,11 +124,28 @@ a.project-card-button {
 
 .search-input {
   margin:0;
-  height:2.9em; 
+  height:2.5em; 
   width:25em;
   margin-left:1em;
-  margin-top:1.4em;
+  margin-top:1.1em;
   border-radius:2px;
   border:none;
   padding:6px;
+  font-size:1em;
+}
+
+
+@media only screen and (max-width:1500px) {
+  .search-container {
+    width:45%;
+  }
+
+}
+
+
+@media only screen and (max-width:780px) {
+  .search-container {
+    width:70%;
+  }
+
 }

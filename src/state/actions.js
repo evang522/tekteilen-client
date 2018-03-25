@@ -118,6 +118,7 @@ export const register = credentials => dispatch => {
 //==========================================ASYNC PROJECT ACTIONS ===================>
 
 export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => { 
+  console.log('getAllProjects was called');
   if (getState().reducers.userInfo) {
   const {projects} = getState().reducers;
   if (!forceUpdate && projects.length) { 
@@ -256,7 +257,7 @@ export const deleteProjectAsync = (projectId) => (dispatch, getState) => {
 //==================================COMMENT ACTIONS=========================>
 
 export const getCommentsAsync = () => (dispatch,getState) => {
-    dispatch(setLoading());
+    // dispatch(setLoading());
     const fetchOptions = {
         headers: {
         'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`,
@@ -280,7 +281,7 @@ export const getCommentsAsync = () => (dispatch,getState) => {
 
 export const addCommentAsync = (userId,projectId, commentBody) => (dispatch, getState) => {
 
-  dispatch(setLoading());
+  // dispatch(setLoading());
     const headers =  {
       'Authorization':`Bearer ${getState().reducers.authToken || localStorage.getItem('Authtoken') || null}`,
       'Content-Type':'application/json'
@@ -310,7 +311,7 @@ export const addCommentAsync = (userId,projectId, commentBody) => (dispatch, get
 }
 
 export const deleteComment = (commentId) => (dispatch, getState) => {
-  dispatch(setLoading());
+  // dispatch(setLoading());
   const axiosOptions = {
     url: `${API_URL}/comments/${commentId}`,
     headers: {
@@ -329,6 +330,8 @@ export const deleteComment = (commentId) => (dispatch, getState) => {
       dispatch(clearLoading());
     })
 }
+
+
 
 
 

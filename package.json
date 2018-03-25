@@ -18,13 +18,14 @@
     "react-toastr": "^3.0.0",
     "redux": "^3.7.2",
     "redux-form": "^7.3.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "socket.io-client": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy":"npm run build && netlify deploy"
+    "deploy": "npm run build && netlify deploy"
   }
 }
