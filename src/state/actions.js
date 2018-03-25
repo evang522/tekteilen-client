@@ -159,10 +159,13 @@ export const addProjectAsync = project => (dispatch,getState) => {
       headers,
     })
       .then(response =>{
-
         dispatch(addProject(response.data))
+        dispatch(setProjectRedirect());
       })
       .catch(err => {
+        if (err.response.status === 400) {
+          return toastr.warning(err.response.data.message);
+          }
         toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
 
       });

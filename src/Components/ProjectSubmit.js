@@ -20,7 +20,6 @@ export class ProjectSubmit extends React.Component {
   onSubmit = values => {
     console.log(values);
     this.props.dispatch(addProjectAsync(values))
-    this.props.dispatch(setProjectRedirect());
   }
 
   render() {

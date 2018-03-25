@@ -2,7 +2,13 @@
   color:rgb(250, 110, 89);
   margin-top:2em;
   font-size:3em;
-  
+}
+
+h1.project-dash-header {
+  display:block;
+  overflow-wrap:break-word;
+  max-width:90%;
+  margin:0 auto;
 }
 
 .divider {
@@ -41,10 +47,12 @@
 
 .project-description {
   line-height:1.45em;
+  max-width:100%;
+  word-wrap: break-word;
 }
 
 .project-description-text {
-  width:40em;
+  width:90%;
 }
 
 .join-project-button {
