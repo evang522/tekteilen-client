@@ -24,11 +24,13 @@ https://tekteilen-app.netlify.com
 ### Server
 *  Node.js
 *  Express.js
+*  Socket.io for realtime chat
 *  Custom Authentication Middleware
 
 ### Client Technologies
 * React.js
 * Redux
+* Socket.io for realtime chat
 * Moment.js
 * Toastr
 
