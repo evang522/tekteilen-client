@@ -43,7 +43,6 @@ const userProjects = (user) =>  {
     }
 }
 
-console.log(userProjects);
 
     return (
       <div className='users-container'>

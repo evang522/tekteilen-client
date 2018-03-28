@@ -1,5 +1,5 @@
 import React from 'react';
-import {getAllProjects, clearError, clearRedirects} from '../state/actions';
+import {getAllProjects, clearError, search, clearSearch, clearRedirects} from '../state/actions';
 import {connect} from 'react-redux';
 import {withRouter, Redirect, Link} from 'react-router-dom';
 import './css/Projects.css';
@@ -15,6 +15,24 @@ export class Projects extends React.Component{
     }
   }
 
+  
+  componentWillUnmount() {
+    this.props.dispatch(clearSearch())
+  }
+
+  searchProjects = () => {
+    this.props.dispatch(search(this.searchInput.value));
+    this.searchInput.value= '';
+  }
+
+  handleKeyDown = function (e, cb) {
+    if (e.key === 'Enter' && e.shiftKey === false) {
+      e.preventDefault();
+      cb();
+    }
+  };
+
+
   render() {
 
     return (
@@ -28,11 +46,22 @@ export class Projects extends React.Component{
         <div>
             <Link to='/add/project' className='create-new-project-button'>+New Project </Link>
             <div className='search-container'>
-              <button className='search-project-button'>Search</button>
-              <input type='text' className='search-input' placeholder = 'Search...'/>
+              <button onClick={this.searchProjects} className='search-project-button'>Search</button>
+              <input onKeyDown={e => this.handleKeyDown(e,this.searchProjects)} type='text' ref={input => {this.searchInput = input}}className='search-input' placeholder = 'leave blank to return all projects '/>
             </div>
           <div className='projects-container'>
-          {this.props.projects && this.props.projects.length ? this.props.projects.map(project => (
+
+          {/* IF SEARCH IS SET TO TRUE */}
+          {this.props.search && this.props.searchResults.length ? this.props.searchResults.map(project => (
+          <div data-id={project.id} key={project.id} className='project-card'>
+            <h1 className='project-card-title'> {project.title}</h1>
+            <p className='project-card-description'> Description: {project.description}</p>
+            <p className='project-card-organization'> Organization:{project.organization}</p> 
+            <Link className='project-card-button' to={'/projects/' + project.id}>Open Project</Link>
+          </div>)) : '' }
+
+          {/* IF SEARCH IS SET TO FALSE */}
+          {!this.props.search && this.props.projects && this.props.projects.length ? this.props.projects.map(project => (
           <div data-id={project.id} key={project.id} className='project-card'>
             <h1 className='project-card-title'> {project.title}</h1>
             <p className='project-card-description'> Description: {project.description}</p>
@@ -54,6 +83,8 @@ const mapStateToProps = state => ({
   projects: state.reducers.projects || [],
   serverError:state.reducers.appError ? state.reducers.appError.serverError : null,
   loggedIn: state.reducers.authToken ? true : false,
+  search: state.reducers.search,
+  searchResults: state.reducers.searchResults
 })
 
 export default withRouter(connect(mapStateToProps)(Projects));

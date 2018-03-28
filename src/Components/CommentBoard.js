@@ -17,7 +17,6 @@ export class CommentBoard extends React.Component {
 
     this.socket.on(`chat-project-${this.props.project? this.props.project.id : ''}`, data => {
       this.props.dispatch(getCommentsAsync());
-      console.log('dispatching comment fetch');
     })
 
   }

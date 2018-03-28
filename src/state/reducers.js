@@ -1,4 +1,4 @@
-import {SET_LOADING, CONFIRM_DELETE, HIDE_CONFIRM_DELETE, POPULATE_COMMENTS, DELETE_PROJECT, CLEAR_LOADING, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE, REGISTER_SUCCESS} from './actions';
+import {SET_LOADING, POPULATE_SEARCHRESULTS, CONFIRM_DELETE, SET_SEARCH, HIDE_CONFIRM_DELETE, POPULATE_COMMENTS, DELETE_PROJECT, CLEAR_LOADING, HIDELOGOUT_DIALOGUE, CLEAR_REDIRECTS, SET_PROJECT_REDIRECT, LOGOUT, SET_TOKEN, POPULATE_PROJECTS, SET_ERROR, CLEAR_ERROR, POPULATE_USERS, ADD_PROJECT, SHOWLOGOUT_DIALOGUE, REGISTER_SUCCESS, CLEAR_SEARCH} from './actions';
 
 const initialState = {
   loading: false,
@@ -11,6 +11,7 @@ const initialState = {
   comments: [],
   showConfirmDelete:false,
   redirectToProjects:false,
+  searchResults: []
 }
 
 export const reducers = (state = initialState, action) => {
@@ -34,6 +35,12 @@ export const reducers = (state = initialState, action) => {
       const returnValue= Object.assign({}, state, {appError: Object.assign({},state.appError, {userError:action.err}), loading:false})
       return returnValue;
     }
+  }
+  if (action.type===SET_SEARCH) {
+    return Object.assign({}, state, {search:true})
+  }
+  if (action.type===CLEAR_SEARCH) {
+    return Object.assign({}, state, {search:false})
   }
   if (action.type===CONFIRM_DELETE) {
     return Object.assign({}, state, {showConfirmDelete:true});
@@ -70,6 +77,9 @@ export const reducers = (state = initialState, action) => {
     state.projects
       .filter(project => project.id !== action.projectId)
     })
+  }
+  if (action.type === POPULATE_SEARCHRESULTS) {
+    return Object.assign({}, state, {searchResults:action.results})
   }
   if(action.type===REGISTER_SUCCESS) {
     return Object.assign({},state, {registerSuccess:true});

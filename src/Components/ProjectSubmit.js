@@ -3,7 +3,7 @@ import {reduxForm, Field} from 'redux-form';
 import Input from '../Components/Input';
 import {connect} from 'react-redux';
 import {required} from '../state/validators';
-import {addProjectAsync, getAllProjects, setProjectRedirect} from '../state/actions';
+import {addProjectAsync, getAllProjects} from '../state/actions';
 import {Redirect} from 'react-router-dom';
 import './css/ProjectSubmit.css';
 
@@ -11,14 +11,12 @@ export class ProjectSubmit extends React.Component {
 
   
   componentDidMount() {
-    console.log('visited project submit');
     if (this.props.projects.length < 1) {
       return this.props.dispatch(getAllProjects());
     }
   }
 
   onSubmit = values => {
-    console.log(values);
     this.props.dispatch(addProjectAsync(values))
   }
 

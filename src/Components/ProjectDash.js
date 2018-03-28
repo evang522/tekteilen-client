@@ -7,21 +7,15 @@ import {MembersList} from '../Components/MembersList';
 import CommentBoard from './CommentBoard';
 import ConfirmDelete from './ConfirmDelete';
 import {toastr} from 'react-redux-toastr';
-// import io from 'socket.io-client';
-// import {SOCKET_URL} from '../config';
+
 
 export class ProjectDash extends React.Component {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.socket = io(SOCKET_URL);
-  // }
-
   componentDidMount() {
-    console.log('loggedIn?', this.props.loggedIn);
     this.props.dispatch(getAllProjects());
     this.props.dispatch(fetchUsers());
   }
+
 
   onClick() {
     this.props.dispatch(deleteProjectAsync(this.props.project.id));
@@ -33,10 +27,6 @@ export class ProjectDash extends React.Component {
 
     this.props.dispatch(joinProjectAsync(this.props.userInfo.id, this.props.project.id, toastrSuccess, toastrError));
 
-    // console.log('projectid', this.props.project.id);
-    // this.socket.emit('volunteer change', {
-    //   projectId: this.props.project.id
-    // })
   }
   
   leaveProject () {

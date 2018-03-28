@@ -49,6 +49,15 @@
   color:white;
 }
 
+
+
+@media only screen and (max-width: 1500px) {
+  .about-tekteilen {
+    font-size:.5em !important;
+  }
+
+}
+
 @media only screen and (max-width: 1000px) {
   .homepage-image {
     width:6em;

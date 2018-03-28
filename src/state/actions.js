@@ -58,9 +58,15 @@ export const login = (credentials,errorToast, successToast) => (dispatch,getStat
   })
     .then(res => res.json())
     .then(data => {
+      console.log('then block ran', data);
       if (data.status===400) {
         dispatch(clearLoading());
         return errorToast()
+      }
+
+      if (data.status===500) {
+        dispatch(clearLoading());
+        return toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
 
       }
       successToast();
@@ -118,7 +124,6 @@ export const register = credentials => dispatch => {
 //==========================================ASYNC PROJECT ACTIONS ===================>
 
 export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => { 
-  console.log('getAllProjects was called');
   if (getState().reducers.userInfo) {
   const {projects} = getState().reducers;
   if (!forceUpdate && projects.length) { 
@@ -144,6 +149,10 @@ export const getAllProjects = (forceUpdate=false) => (dispatch,getState) => {
   }
 }
 
+
+// export const searchProjects = searchTerm => (dispatch, getState) => {
+//   if ()
+// }
 
 
 export const addProjectAsync = project => (dispatch,getState) => {
@@ -252,10 +261,34 @@ export const deleteProjectAsync = (projectId) => (dispatch, getState) => {
   })
   .catch(err => {
     toastr.message('App Error', 'We\'re having a hard time reaching the server right now. Please refresh and try again', {position:'top-center'});
-
   })
 
 }
+
+//===============================SEARCH ACTIONS=============================>
+
+export const search = (searchTerm) => (dispatch, getState) => {
+  dispatch(setLoading());
+  dispatch(setSearch());
+  const headers=  {
+    'Authorization':`Bearer ${localStorage.getItem('Authtoken') || null}`,
+    'Content-Type': 'application/json'
+  }
+  axios({
+    method:'GET',
+    url: `${API_URL}/projects?q=${searchTerm}`,
+    headers
+  })
+  .then(response => {
+    console.log(response.data);
+    dispatch(populateSearchResults(response.data));
+    dispatch(clearLoading());
+  })
+  
+}
+
+
+
 
 //==================================COMMENT ACTIONS=========================>
 
@@ -375,6 +408,23 @@ export const registerSuccess = () => ({
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const clearError = () => ({
   type:CLEAR_ERROR
+})
+
+export const SET_SEARCH = 'SET_SEARCH';
+export const setSearch = () => ({
+  type:SET_SEARCH
+})
+
+export const POPULATE_SEARCHRESULTS = 'POPULATE_SEARCHRESULTS';
+export const populateSearchResults = (results) => ({
+  type:POPULATE_SEARCHRESULTS,
+  results
+})
+
+
+export const CLEAR_SEARCH = 'CLEAR_SEARCH';
+export const clearSearch = () => ({
+  type:CLEAR_SEARCH
 })
 
 export const CLEAR_REDIRECTS = 'CLEAR_REDIRECTS';

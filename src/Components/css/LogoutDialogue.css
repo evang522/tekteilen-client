@@ -15,6 +15,12 @@ transform: translate(-50%, -90%);
 }
 
 
+.button-container {
+  display:flex;
+  justify-content:center;
+}
+
+
 .dialogue-container button{
   width:7em;
   padding:8px;
@@ -53,5 +59,6 @@ transform: translate(-50%, -90%);
 
   .button-container {
     display:flex;
+    justify-content:center;
   }
 }
