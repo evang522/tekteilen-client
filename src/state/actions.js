@@ -58,7 +58,6 @@ export const login = (credentials,errorToast, successToast) => (dispatch,getStat
   })
     .then(res => res.json())
     .then(data => {
-      console.log('then block ran', data);
       if (data.status===400) {
         dispatch(clearLoading());
         return errorToast()
@@ -280,7 +279,6 @@ export const search = (searchTerm) => (dispatch, getState) => {
     headers
   })
   .then(response => {
-    console.log(response.data);
     dispatch(populateSearchResults(response.data));
     dispatch(clearLoading());
   })
