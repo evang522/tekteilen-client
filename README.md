@@ -25,7 +25,7 @@ https://tekteilen-app.netlify.com
 *  Node.js
 *  Express.js
 *  Socket.io for realtime chat
-*  Custom Authentication Middleware
+*  Custom Authentication Middleware making use of JWT tokens
 
 ### Client Technologies
 * React.js
